@@ -15,5 +15,5 @@ MonoBehaviour:
   linearDrag: 0
   collideMask:
     serializedVersion: 2
-    m_Bits: 128
-  maxVelocity: 3.4028235e+38
+    m_Bits: 640
+  maxVelocity: 99999

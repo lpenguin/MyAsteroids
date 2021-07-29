@@ -1,4 +1,5 @@
-﻿using Game.Utils;
+﻿using System;
+using Game.Utils;
 using UnityEngine;
 
 namespace Game.GameManager
@@ -11,5 +12,8 @@ namespace Game.GameManager
         public ObservableValue<float> speed = new ObservableValue<float>();
         public ObservableValue<float> laserCapacity = new ObservableValue<float>();
         public ObservableValue<int> score = new ObservableValue<int>();
+
+        [NonSerialized]
+        public Transform playerTransform;
     }
 }

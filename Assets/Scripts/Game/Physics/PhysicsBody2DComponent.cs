@@ -38,5 +38,19 @@ namespace Game.Physics
         {
             _body2D.Step(Time.fixedDeltaTime);
         }
+
+        private void OnDrawGizmos()
+        {
+            if (_body2D == null)
+            {
+                return;
+            }
+            Gizmos.color = Color.green;
+            var position = transform.position;
+            Gizmos.DrawRay(position, _body2D.Velocity);
+            
+            Gizmos.color = Color.white;
+            Gizmos.DrawRay(position, transform.up);
+        }
     }
 }

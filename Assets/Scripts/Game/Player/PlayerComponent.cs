@@ -1,10 +1,10 @@
-﻿using Game.Physics;
+﻿using System;
+using Game.Physics;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Game.Player
 {
-    // TODO: RequireComponent generates meaningless "creating missing component messages in the prefab mode"
     [AddComponentMenu("MyAsteroids/PlayerComponent")]
     public class PlayerComponent: MonoBehaviour, IGameComponent
     {
@@ -14,6 +14,13 @@ namespace Game.Player
         private PlayerController _playerController;
 
         private PlayerControls _controls;
+
+        private void Awake()
+        {
+            // TODO: move to controller
+            playerParameters.gameState.playerTransform = transform;
+        }
+
         private void Start()
         {
             Assert.IsTrue(TryGetComponent<PhysicsBody2DComponent>(out var physicsBody2DComponent), 

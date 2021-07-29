@@ -10,7 +10,11 @@ namespace Game.Physics
         public Vector2 Acceleration { get; set; }
         public Vector2 Position => _transform.position;
 
-        public float Rotation => _transform.rotation.eulerAngles.z;
+        public float Rotation
+        {
+            get => _transform.rotation.eulerAngles.z;
+            set => _transform.rotation = Quaternion.AngleAxis(value, Vector3.forward);
+        }
 
         public delegate void Collision(Collider2D collider);
 
