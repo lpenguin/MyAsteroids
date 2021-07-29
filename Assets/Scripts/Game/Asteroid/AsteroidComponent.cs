@@ -1,5 +1,4 @@
 ﻿using Game.Physics;
-using Game.ScreenWarp;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -28,6 +27,7 @@ namespace Game.Asteroid
             Spawner?.Decrement();
         }
 
+        // TODO: move to controller
         public OffScreenSpawner Spawner { get; set; }
         public Transform Transform => transform;
         public void DestroyGameObject()

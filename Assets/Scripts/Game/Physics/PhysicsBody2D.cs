@@ -8,8 +8,10 @@ namespace Game.Physics
         public Vector2 Velocity { get; set; }
         public float AngularVelocity { get; set; }
         public Vector2 Acceleration { get; set; }
+        public Vector2 Position => _transform.position;
 
-        
+        public float Rotation => _transform.rotation.eulerAngles.z;
+
         public delegate void Collision(Collider2D collider);
 
         public event Collision OnCollision;

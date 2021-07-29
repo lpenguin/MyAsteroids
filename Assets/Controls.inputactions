@@ -95,17 +95,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "negative",
-                    "id": "b192cf94-e293-48c9-99d9-1755ef503e32",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Accelerate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "1D Axis",
                     "id": "1dde1d72-9504-4dbc-9fe6-d268624803f5",
                     "path": "1DAxis",
@@ -120,17 +109,6 @@
                     "name": "positive",
                     "id": "40dca4f3-b1a6-4c29-8ccf-e847fed36575",
                     "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Accelerate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "negative",
-                    "id": "5d37fe29-e628-4ab0-aa8c-24594e5da6d3",
-                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -159,28 +137,6 @@
                     "action": "Accelerate",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "negative",
-                    "id": "52b3afa3-1ba4-43cf-ad03-45c6ad8c2bbc",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Accelerate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "13ab05e5-6e83-4c60-9387-91d938f297f5",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Rotate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "1D Axis",

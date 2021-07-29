@@ -47,6 +47,11 @@ namespace Game.Player
             _body2D.SetThrust(accelerationInput * _parameters.thrust);
             _body2D.AngularVelocity = -rotationInput * _parameters.rotationSpeed;
             UpdateWeapons(timeStep);
+            
+            _parameters.gameState.speed.Set(_body2D.Velocity.magnitude);
+            _parameters.gameState.position.Set(_body2D.Position);
+            _parameters.gameState.angle.Set(_body2D.Rotation);
+            
         }
 
         private void UpdateWeapons(float timeStep)
