@@ -86,7 +86,7 @@ namespace Game
                 position = new Vector2(x, y);
             }
 
-            var go = Instantiate(prefab, position, Quaternion.identity);
+            var go = Instantiate(prefab, position, Quaternion.identity, transform);
             if (go.TryGetComponent<IHasSpawnerParent>(out var hasSpawnerParent))
             {
                 hasSpawnerParent.Spawner = this;

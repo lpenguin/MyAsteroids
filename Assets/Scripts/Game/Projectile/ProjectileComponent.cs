@@ -1,27 +1,33 @@
-﻿using Game.Physics;
+﻿using System;
+using Game.Physics;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Game.Projectile
 {
-    public class ProjectileComponent: MonoBehaviour, IGameView
+    [AddComponentMenu("MyAsteroids/ProjectileComponent")]
+    public class ProjectileComponent: MonoBehaviour, IGameComponent
     {
         [SerializeField] 
         private ProjectileDefinition projectileParameters;
         
-        [SerializeField] 
-        private PhysicsBody2DDefinition bodyParameters;
-
         private ProjectileController _projectileController;
-        private void Awake()
+        private void Start()
         {
-            IPhysicsBody2DShape shape = null;
-            if (TryGetComponent<CircleCollider2D>(out var circleCollider))
-            {
-                shape = new CirclePhysicsBody2DShape(circleCollider);
-            }
-            
-            var body2D = new PhysicsBody2D(transform, bodyParameters, shape);
+            Assert.IsTrue(TryGetComponent<PhysicsBody2DComponent>(out var physicsBody2DComponent), "Must have a PhysicsBody2DComponent");
+
+            var body2D = physicsBody2DComponent.Body2D;
             _projectileController = new ProjectileController(body2D, projectileParameters, this);
+        }
+
+        private void OnEnable()
+        {
+            _projectileController?.OnEnable();
+        }
+
+        private void OnDisable()
+        {
+            _projectileController?.OnDisable();
         }
 
         private void FixedUpdate()

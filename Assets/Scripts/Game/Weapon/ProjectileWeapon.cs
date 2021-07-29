@@ -7,9 +7,9 @@ namespace Game.Weapon
     {
         public GameObject projectilePrefab;
 
-        public override void Shoot(Vector3 position, Quaternion rotation)
+        public override void Shoot(Transform transform)
         {
-            var go = Object.Instantiate(projectilePrefab, position, rotation);
+            var go = Instantiate(projectilePrefab, transform.position, transform.rotation);
         }
 
         public override void CancelShoot()

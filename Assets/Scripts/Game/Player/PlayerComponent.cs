@@ -1,30 +1,26 @@
 ﻿using Game.Physics;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Game.Player
 {
-    public class PlayerComponent: MonoBehaviour, IGameView
+    // TODO: RequireComponent generates meaningless "creating missing component messages in the prefab mode"
+    [AddComponentMenu("MyAsteroids/PlayerComponent")]
+    public class PlayerComponent: MonoBehaviour, IGameComponent
     {
         [SerializeField] 
         private PlayerDefinition playerParameters;
 
-        [SerializeField] 
-        private PhysicsBody2DDefinition bodyParameters;
-
-        
         private PlayerController _playerController;
 
         private PlayerControls _controls;
-        // private @Controls _controls;
         private void Start()
         {
-            var size = GetComponent<SpriteRenderer>().bounds.size;
-            
-            var tunnelController = new ScreenTunnelLogic(Camera.main, transform, size);
+            Assert.IsTrue(TryGetComponent<PhysicsBody2DComponent>(out var physicsBody2DComponent), 
+                "Must have a PhysicsBody2DComponent");
 
-            var body = new PhysicsBody2D(transform, bodyParameters, null);
-
-            _playerController = new PlayerController(body, tunnelController, _controls, playerParameters, this);
+            var body = physicsBody2DComponent.Body2D;
+            _playerController = new PlayerController(body, _controls, playerParameters, this);
         }
 
         private void OnEnable()
@@ -43,15 +39,12 @@ namespace Game.Player
             _playerController.Update(Time.deltaTime);
         }
 
-        private void FixedUpdate()
-        {
-            _playerController.PhysicsUpdate(Time.fixedDeltaTime);
-        }
 
         public Transform Transform => transform;
+        
         public void DestroyGameObject()
         {
-            
+            Destroy(gameObject);
         }
     }
 }

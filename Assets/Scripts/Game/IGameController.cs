@@ -1,8 +1,28 @@
 ﻿namespace Game
 {
-    public interface IGameController
+    public abstract class GameController
     {
-        void Update(float timeStep);
-        void PhysicsUpdate(float timeStep);
+        public virtual void Update(float timeStep)
+        {
+            
+        }
+
+        // TODO:
+        public virtual void PhysicsUpdate(float timeStep)
+        {
+            
+        }
+
+        // TODO:
+        public virtual void OnDisable()
+        {
+            
+        }
+
+        // TODO:
+        public virtual void OnEnable()
+        {
+            
+        }
     }
 }

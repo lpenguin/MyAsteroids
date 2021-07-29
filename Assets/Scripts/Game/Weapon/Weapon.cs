@@ -4,7 +4,7 @@ namespace Game.Weapon
 {
     public abstract class Weapon: ScriptableObject
     {
-        public abstract void Shoot(Vector3 position, Quaternion quaternion);
+        public abstract void Shoot(Transform transform);
 
         public abstract void CancelShoot();
 

@@ -2,29 +2,25 @@
 
 namespace Game.Player
 {
-    public class PlayerController: IGameController
+    public class PlayerController: GameController
     {
         
         private readonly PhysicsBody2D _body2D;
-        private readonly ScreenTunnelLogic _screenTunnelLogic;
         private readonly PlayerControls _controls;
         private readonly PlayerDefinition _parameters;
-        private readonly IGameView _gameView;
 
-        public PlayerController(PhysicsBody2D body2D, ScreenTunnelLogic screenTunnelLogic, PlayerControls controls, PlayerDefinition parameters, IGameView gameView)
+        public PlayerController(PhysicsBody2D body2D, PlayerControls controls, PlayerDefinition parameters, IGameComponent gameComponent)
         {
             _body2D = body2D;
-            _screenTunnelLogic = screenTunnelLogic;
             _controls = controls;
             _parameters = parameters;
-            _gameView = gameView;
             var shootControl = _controls.Main.Shoot;
 
-            var tr = _gameView.Transform;
+            var tr = gameComponent.Transform;
             
             shootControl.performed += context =>
             {
-                _parameters.primaryWeapon.Shoot(tr.position, tr.rotation);
+                _parameters.primaryWeapon.Shoot(tr);
             };
             
             shootControl.canceled += context =>
@@ -35,7 +31,7 @@ namespace Game.Player
             var shootSecondaryControl = _controls.Main.ShootSecondary;
             shootSecondaryControl.performed += context =>
             {
-                _parameters.secondaryWeapon.Shoot(tr.position, tr.rotation);
+                _parameters.secondaryWeapon.Shoot(tr);
             };
             
             shootSecondaryControl.canceled += context =>
@@ -44,13 +40,12 @@ namespace Game.Player
             };
         }
 
-        public void Update(float timeStep)
+        public override void Update(float timeStep)
         {
             var accelerationInput = _controls.Main.Accelerate.ReadValue<float>();
             var rotationInput = _controls.Main.Rotate.ReadValue<float>();
             _body2D.SetThrust(accelerationInput * _parameters.thrust);
             _body2D.AngularVelocity = -rotationInput * _parameters.rotationSpeed;
-            _screenTunnelLogic.UpdateTunnel();
             UpdateWeapons(timeStep);
         }
 
@@ -58,11 +53,6 @@ namespace Game.Player
         {
             _parameters.primaryWeapon.UpdateWeapon(timeStep);
             _parameters.secondaryWeapon.UpdateWeapon(timeStep);
-        }
-
-        public void PhysicsUpdate(float timeStep)
-        {
-            _body2D.Step(timeStep);
         }
     }
 }

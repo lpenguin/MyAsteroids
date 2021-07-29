@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2327931043142301700}
   - component: {fileID: 2327931043142301701}
+  - component: {fileID: 4509568137759981386}
   - component: {fileID: 2327931043142301702}
   m_Layer: 0
   m_Name: Projectile
@@ -49,6 +50,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.09
+--- !u!114 &4509568137759981386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327931043142301703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9936603c04441698360d0c32ffd1c2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  definition: {fileID: 11400000, guid: a60aa53782752294c8f9abd607201064, type: 2}
 --- !u!114 &2327931043142301702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +76,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileParameters: {fileID: 11400000, guid: c98e651c2c160fb4fa96927c18a97024, type: 2}
-  bodyParameters: {fileID: 11400000, guid: a60aa53782752294c8f9abd607201064, type: 2}
 --- !u!1 &2327931044024559115
 GameObject:
   m_ObjectHideFlags: 0

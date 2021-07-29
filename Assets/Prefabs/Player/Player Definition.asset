@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d006c5231f24b629cf09549d2d81961, type: 3}
   m_Name: Player Definition
   m_EditorClassIdentifier: 
-  thrust: 4
+  thrust: 5
   rotationSpeed: 250
   primaryWeapon: {fileID: 11400000, guid: 4781c358de0a9254fa5bcf7a7beebb2e, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: 4781c358de0a9254fa5bcf7a7beebb2e, type: 2}

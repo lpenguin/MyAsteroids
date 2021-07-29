@@ -1,52 +1,25 @@
 ﻿using Game.Physics;
-using Game.Utils;
+using Game.ScreenWarp;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Game.Asteroid
 {
-    public class AsteroidComponent: MonoBehaviour, OffScreenSpawner.IHasSpawnerParent, IGameView, IHitReceiver
+    [AddComponentMenu("MyAsteroids/AsteroidComponent")]
+    public class AsteroidComponent: MonoBehaviour, OffScreenSpawner.IHasSpawnerParent, IGameComponent, IHitReceiver
     {
         [SerializeField] 
         private AsteroidDefinition parameters;
 
-        [SerializeField]
-        private PhysicsBody2DDefinition bodyParameters;
-        
         private AsteroidController _asteroidController;
 
         private void Start()
         {
-            Vector2 size = Vector2.zero;
-            if (TryGetComponent<SpriteRenderer>(out var spriteRenderer))
-            {
-                size = spriteRenderer.bounds.size;
-            }
+            Assert.IsTrue(TryGetComponent<PhysicsBody2DComponent>(out var physicsBody2DComponent), 
+                "Must have a PhysicsBody2DComponent");
 
-            IPhysicsBody2DShape shape = null;
-            if (TryGetComponent<CircleCollider2D>(out var circleCollider))
-            {
-                shape = new CirclePhysicsBody2DShape(circleCollider);
-            }
-            
-            
-            var body = new PhysicsBody2D(transform, bodyParameters, shape)
-            {
-                Velocity = parameters.linearVelocityRange.RandomVector2(),
-                AngularVelocity = parameters.angularVelocityRange.RandomFloat(),
-            };
-            
-            var tunnelController = new ScreenTunnelLogic(Camera.main, transform, size);
-            _asteroidController = new AsteroidController(body, tunnelController, parameters, this);
-        }
-
-        private void Update()
-        {
-            _asteroidController.Update(Time.deltaTime);
-        }
-
-        private void FixedUpdate()
-        {
-            _asteroidController.PhysicsUpdate(Time.fixedDeltaTime);
+            var body = physicsBody2DComponent.Body2D;
+            _asteroidController = new AsteroidController(this, parameters, body);
         }
 
         private void OnDestroy()

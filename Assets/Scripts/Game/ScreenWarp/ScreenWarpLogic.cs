@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
-namespace Game
+namespace Game.ScreenWarp
 {
-    public class ScreenTunnelLogic
+    public class ScreenWarpLogic
     {
         private readonly Camera _camera;
         private readonly Transform _transform;
         private readonly Vector2 _size;
 
-        public ScreenTunnelLogic(Camera camera, Transform transform, Vector2 size)
+        public ScreenWarpLogic(Camera camera, Transform transform, Vector2 size)
         {
             _camera = camera;
             _transform = transform;

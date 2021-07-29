@@ -4,20 +4,32 @@ using UnityEngine;
 
 namespace Game.Asteroid
 {
-    public class AsteroidController: IGameController
+    public class AsteroidController: GameController
     {
         private readonly PhysicsBody2D _body2D;
-        private readonly ScreenTunnelLogic _tunnelLogic;
         private readonly AsteroidDefinition _parameters;
-        private readonly IGameView _gameView;
+        private readonly IGameComponent _gameComponent;
 
-        public AsteroidController(PhysicsBody2D body2D, ScreenTunnelLogic tunnelLogic, AsteroidDefinition parameters, IGameView gameView)
+        public AsteroidController(IGameComponent gameComponent, AsteroidDefinition parameters, PhysicsBody2D body2D)
         {
             _body2D = body2D;
-            _tunnelLogic = tunnelLogic;
+            _body2D.Velocity = parameters.linearVelocityRange.RandomVector2();
+            _body2D.AngularVelocity = parameters.angularVelocityRange.RandomFloat();
+            
             _parameters = parameters;
-            _gameView = gameView;
+            _gameComponent = gameComponent;
+            // TODO:
             _body2D.OnCollision += OnBodyCollision;
+        }
+
+        public override void OnEnable()
+        {
+            _body2D.OnCollision += OnBodyCollision;
+        }
+
+        public override void OnDisable()
+        {
+            _body2D.OnCollision -= OnBodyCollision;
         }
 
         private void OnBodyCollision(Collider2D collider)
@@ -26,21 +38,11 @@ namespace Game.Asteroid
             ReceiveHit();
         }
 
-        public void Update(float timeStep)
-        {
-            _tunnelLogic.UpdateTunnel();
-        }
-
-        public void PhysicsUpdate(float timeStep)
-        {
-            _body2D.Step(timeStep);
-        }
-
         public void ReceiveHit()
         {
             if (_parameters.spawnOnDamage != null)
             {
-                Vector2 initialPosition = _gameView.Transform.position;
+                Vector2 initialPosition = _gameComponent.Transform.position;
                 
                 for (int i = 0; i < _parameters.spawnCount; i++)
                 {
@@ -48,10 +50,10 @@ namespace Game.Asteroid
                     var offset = _parameters.spawnDistance.RandomVector2();
 
                     var go = Object.Instantiate(_parameters.spawnOnDamage, initialPosition + offset,
-                        Quaternion.identity);
+                        Quaternion.identity, _gameComponent.Transform.parent);
                 }
             }
-            _gameView.DestroyGameObject();
+            _gameComponent.DestroyGameObject();
         }
     }
 }
