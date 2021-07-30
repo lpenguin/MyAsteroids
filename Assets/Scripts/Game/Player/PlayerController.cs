@@ -1,4 +1,5 @@
 ﻿using Game.Physics;
+using Game.Weapon;
 
 namespace Game.Player
 {
@@ -9,34 +10,38 @@ namespace Game.Player
         private readonly PlayerControls _controls;
         private readonly PlayerDefinition _parameters;
 
+        private readonly IWeapon _primaryWeapon;
+        private readonly IWeapon _secondaryWeapon;
         public PlayerController(PhysicsBody2D body2D, PlayerControls controls, PlayerDefinition parameters, IGameComponent gameComponent)
         {
             _body2D = body2D;
             _controls = controls;
             _parameters = parameters;
-            var shootControl = _controls.Main.Shoot;
-
             var tr = gameComponent.Transform;
-            
+
+            _primaryWeapon = _parameters.primaryWeaponDefinition.CreateWeapon(tr);
+            _secondaryWeapon = _parameters.secondaryWeaponDefinition.CreateWeapon(tr);
+
+            var shootControl = _controls.Main.Shoot;
             shootControl.performed += context =>
             {
-                _parameters.primaryWeapon.Shoot(tr);
+                _primaryWeapon.Shoot();
             };
             
             shootControl.canceled += context =>
             {
-                _parameters.primaryWeapon.CancelShoot();
+                _primaryWeapon.CancelShoot();
             };
 
             var shootSecondaryControl = _controls.Main.ShootSecondary;
             shootSecondaryControl.performed += context =>
             {
-                _parameters.secondaryWeapon.Shoot(tr);
+                _secondaryWeapon.Shoot();
             };
             
             shootSecondaryControl.canceled += context =>
             {
-                _parameters.secondaryWeapon.CancelShoot();
+                _secondaryWeapon.CancelShoot();
             };
         }
 
@@ -56,8 +61,8 @@ namespace Game.Player
 
         private void UpdateWeapons(float timeStep)
         {
-            _parameters.primaryWeapon.UpdateWeapon(timeStep);
-            _parameters.secondaryWeapon.UpdateWeapon(timeStep);
+            _primaryWeapon.UpdateWeapon(timeStep);
+            _secondaryWeapon.UpdateWeapon(timeStep);
         }
     }
 }

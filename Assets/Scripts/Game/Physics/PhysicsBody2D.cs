@@ -35,14 +35,9 @@ namespace Game.Physics
         public void Step(float timeStep)
         {
             Velocity += (Acceleration - _parameters.linearDrag * Velocity) * timeStep;
-            
-            float speed = Velocity.magnitude;
-            if (speed >= _parameters.maxVelocity)
-            {
-                Velocity *= _parameters.maxVelocity/speed;
-            }
+            Velocity = Vector2.ClampMagnitude(Velocity, _parameters.maxVelocity);
 
-            Vector2 delta = Velocity * timeStep;
+            Vector2 deltaPos = Velocity * timeStep;
 
             if (OnCollision != null && _shape != null)
             {
@@ -50,8 +45,8 @@ namespace Game.Physics
                 // TODO: extract function
                 var colliders = _shape.Cast(
                     _transform.position,
-                    delta.normalized,
-                    delta.magnitude,
+                    deltaPos.normalized,
+                    deltaPos.magnitude,
                     _parameters.collideMask);
                 
                 foreach (var collider in colliders)
@@ -60,11 +55,8 @@ namespace Game.Physics
                 }
             }
             
-            _transform.position += (Vector3)(delta);
-            
+            _transform.position += (Vector3)deltaPos;
             _transform.Rotate(Vector3.forward, AngularVelocity * timeStep);
-            
-            
         }
 
         public void SetThrust(float accelerationInput)

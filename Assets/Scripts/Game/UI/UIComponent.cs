@@ -21,12 +21,15 @@ namespace Game.UI
         
         [SerializeField] 
         private Text speedText;
-
+        
+        [SerializeField] 
+        private Text laserChargeText;
         private void Start()
         {
             BindText(speedText, gameState.speed, FloatFormatter);
             BindText(positionText, gameState.position, Vector2Formatter);
             BindText(angleText, gameState.angle, FloatFormatter);
+            BindText(laserChargeText, gameState.laserCharge, FloatFormatter);
         }
 
         private static string Vector2Formatter(Vector2 value)

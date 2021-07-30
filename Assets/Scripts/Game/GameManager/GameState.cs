@@ -10,9 +10,10 @@ namespace Game.GameManager
         public ObservableValue<Vector2> position = new ObservableValue<Vector2>();
         public ObservableValue<float> angle = new ObservableValue<float>();
         public ObservableValue<float> speed = new ObservableValue<float>();
-        public ObservableValue<float> laserCapacity = new ObservableValue<float>();
+        public ObservableValue<float> laserCharge = new ObservableValue<float>();
         public ObservableValue<int> score = new ObservableValue<int>();
 
+        
         [NonSerialized]
         public Transform playerTransform;
     }

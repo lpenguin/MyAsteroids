@@ -10,7 +10,7 @@ namespace Game.Player
         public float rotationSpeed;
         public GameState gameState;
     
-        public Weapon.Weapon primaryWeapon;
-        public Weapon.Weapon secondaryWeapon;
+        public Weapon.WeaponDefinition primaryWeaponDefinition;
+        public Weapon.WeaponDefinition secondaryWeaponDefinition;
     }
 }
