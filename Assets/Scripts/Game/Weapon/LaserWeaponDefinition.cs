@@ -41,6 +41,10 @@ namespace Game.Weapon
 
             public void Shoot()
             {
+                if (_charge < 0.9)
+                {
+                    return;
+                }
                 _isShooting = true;
                 
                 _effect = Instantiate(_definition.laserEffectPrefab, _parent.position, _parent.rotation, _parent).transform;

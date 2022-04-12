@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-    public class UIComponent: MonoBehaviour
+    public class PlayerUIComponent: MonoBehaviour
     {
         [SerializeField] 
         private GameState gameState;
@@ -24,12 +24,28 @@ namespace Game.UI
         
         [SerializeField] 
         private Text laserChargeText;
+
+        [SerializeField]
+        private Image laserChargeImage;
+        
+        [SerializeField]
+        private Image laserChargeMaxImage;
         private void Start()
         {
             BindText(speedText, gameState.speed, FloatFormatter);
             BindText(positionText, gameState.position, Vector2Formatter);
             BindText(angleText, gameState.angle, FloatFormatter);
             BindText(laserChargeText, gameState.laserCharge, FloatFormatter);
+            BindLaserBarImage();
+        }
+
+        private void BindLaserBarImage()
+        {
+            gameState.laserCharge.OnValueChanged += value =>
+            {
+                laserChargeImage.fillAmount = value;
+                laserChargeMaxImage.enabled = Math.Abs(value - 1.0f) < 0.001;
+            };
         }
 
         private static string Vector2Formatter(Vector2 value)

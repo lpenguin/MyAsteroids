@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Laser Weapon Definition
   m_EditorClassIdentifier: 
   laserEffectPrefab: {fileID: 1765312058387620228, guid: f598a842e31027f4d906f1529c223606, type: 3}
-  ammoPerSec: 0
-  restorePerSec: 0.1
+  ammoPerSec: 0.8
+  restorePerSec: 0.3
   hitMask:
     serializedVersion: 2
     m_Bits: 640
