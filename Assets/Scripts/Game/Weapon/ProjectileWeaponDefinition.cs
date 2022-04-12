@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Game.Weapon
 {
@@ -6,7 +7,7 @@ namespace Game.Weapon
     public class ProjectileWeaponDefinition: WeaponDefinition
     {
 
-        public GameObject projectilePrefab;
+        public AssetReference projectilePrefab;
         public override IWeapon CreateWeapon(Transform parent) => new Weapon(this, parent);
         
         private class Weapon : IWeapon
@@ -23,7 +24,7 @@ namespace Game.Weapon
             
             public void Shoot()
             {
-                var go = Instantiate(_definition.projectilePrefab, _parent.position, _parent.rotation);
+                var handle = _definition.projectilePrefab.InstantiateAsync(_parent.position, _parent.rotation);
             }
             
             public void CancelShoot()

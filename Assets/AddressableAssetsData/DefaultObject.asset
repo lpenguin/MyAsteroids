@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d77c489ab5fb41dd82d6abbb6a293ca2, type: 3}
-  m_Name: Projectile Weapon
+  m_Script: {fileID: 11500000, guid: 3a189bb168d8d90478a09ea08c2f3d72, type: 3}
+  m_Name: DefaultObject
   m_EditorClassIdentifier: 
-  projectilePrefab:
-    m_AssetGUID: 7ee76448cc38a18488eed2587d7a602b
-    m_SubObjectName: 
-    m_SubObjectType: 
+  m_AddressableAssetSettingsGuid: ca5ffd5fc4fca7e488c4e1c32021e4d4
