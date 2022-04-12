@@ -12,3 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3d24de2a004ed4ab01744d7b930aac, type: 3}
   m_Name: Game State
   m_EditorClassIdentifier: 
+  position:
+    _value: {x: 0, y: 0}
+  angle:
+    _value: 0
+  speed:
+    _value: 0
+  laserCharge:
+    _value: 0
+  health:
+    _value: 1
+  score:
+    _value: 0

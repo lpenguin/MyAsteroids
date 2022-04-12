@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Game.Utils
 {
@@ -8,6 +9,7 @@ namespace Game.Utils
 
         public event ValueChanged OnValueChanged;
 
+        [SerializeField]
         private T _value;
         
         public ObservableValue():this(default)
@@ -34,5 +36,23 @@ namespace Game.Utils
                 OnValueChanged?.Invoke(_value);
             }
         }
+    }
+    
+    [Serializable]
+    public class ObservableFloat: ObservableValue<float>
+    {
+        
+    }
+    
+    [Serializable]
+    public class ObservableInt: ObservableValue<int>
+    {
+        
+    }
+    
+    [Serializable]
+    public class ObservableVector2: ObservableValue<Vector2>
+    {
+        
     }
 }
