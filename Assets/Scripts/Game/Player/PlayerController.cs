@@ -1,19 +1,18 @@
-﻿using Game.Physics;
-using Game.Weapon;
+﻿using Game.Weapon;
 using UnityEngine;
 
 namespace Game.Player
 {
     public class PlayerController: GameController
     {
-        private readonly PhysicsBody2D _body2D;
+        private readonly Rigidbody2D _body2D;
         private readonly PlayerControls _controls;
         private readonly PlayerDefinition _parameters;
         private readonly Player _player;
 
         private readonly IWeapon _primaryWeapon;
         private readonly IWeapon _secondaryWeapon;
-        public PlayerController(PhysicsBody2D body2D, PlayerControls controls, PlayerDefinition parameters, IGameComponent gameComponent, Player player)
+        public PlayerController(Rigidbody2D body2D, PlayerControls controls, PlayerDefinition parameters, IGameComponent gameComponent, Player player)
         {
             _body2D = body2D;
             _controls = controls;
@@ -55,8 +54,11 @@ namespace Game.Player
             _parameters.playerState.health = _player.Health;
             var accelerationInput = _controls.Main.Accelerate.ReadValue<float>();
             var rotationInput = _controls.Main.Rotate.ReadValue<float>();
-            _body2D.SetThrust(accelerationInput * _parameters.thrust);
-            _body2D.AngularVelocity = -rotationInput * _parameters.rotationSpeed;
+            
+            Vector2 force = _body2D.transform.up * accelerationInput;
+            _body2D.AddForce(force, ForceMode2D.Force);
+            _body2D.angularVelocity = -rotationInput * _parameters.rotationSpeed;
+            
             UpdateWeapons(timeStep);
         }
 

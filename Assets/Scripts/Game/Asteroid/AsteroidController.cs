@@ -1,41 +1,27 @@
-﻿using Game.GameManager;
-using Game.Physics;
-using Game.Utils;
+﻿using Game.Utils;
 using UnityEngine;
 
 namespace Game.Asteroid
 {
     public class AsteroidController: GameController
     {
-        private readonly PhysicsBody2D _body2D;
+        private readonly Rigidbody2D _body2D;
         private readonly AsteroidDefinition _parameters;
         private readonly IGameComponent _gameComponent;
 
-        public AsteroidController(IGameComponent gameComponent, AsteroidDefinition parameters, PhysicsBody2D body2D)
+        public AsteroidController(IGameComponent gameComponent, AsteroidDefinition parameters, Rigidbody2D body2D)
         {
             _body2D = body2D;
-            _body2D.Velocity = parameters.linearVelocityRange.RandomVector2();
-            _body2D.AngularVelocity = parameters.angularVelocityRange.RandomFloat();
+            _body2D.velocity = parameters.linearVelocityRange.RandomVector2();
+            _body2D.angularVelocity = parameters.angularVelocityRange.RandomFloat();
             
             _parameters = parameters;
             _gameComponent = gameComponent;
-            // TODO:
-            _body2D.OnCollision += OnBodyCollision;
         }
 
-        public override void OnEnable()
-        {
-            _body2D.OnCollision += OnBodyCollision;
-        }
 
-        public override void OnDisable()
+        public void HandleCollision(Collider2D collider)
         {
-            _body2D.OnCollision -= OnBodyCollision;
-        }
-
-        private void OnBodyCollision(Collider2D collider)
-        {
-            // Debug.Log($"Collision: {collider.gameObject}");
             ReceiveHit();
             if (collider.TryGetComponent<IHitReceiver>(out var hitReceiver))
             {

@@ -14,7 +14,15 @@ namespace Game.GameManager
 
         [SerializeField]
         private GameObject gameOverUi;
-        
+
+        [SerializeField]
+        private Text scoreText;
+
+        private void Start()
+        {
+            gameOverUi.SetActive(false);
+        }
+
         public void RestartLevel()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().path);
@@ -24,6 +32,7 @@ namespace Game.GameManager
         {
             Assert.IsNotNull(playerState);
             Assert.IsNotNull(gameOverUi);
+            Assert.IsNotNull(scoreText);
             
             playerState.OnPlayerDeath += HandlePlayerDeath;
         }
@@ -37,6 +46,7 @@ namespace Game.GameManager
         {
             Time.timeScale = 0f;
             gameOverUi.SetActive(true);
+            scoreText.text = $"{playerState.score:D}";
         }
 
     }

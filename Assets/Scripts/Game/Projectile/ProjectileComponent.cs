@@ -1,6 +1,4 @@
-﻿using System;
-using Game.Physics;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Game.Projectile
@@ -14,10 +12,10 @@ namespace Game.Projectile
         private ProjectileController _projectileController;
         private void Start()
         {
-            Assert.IsTrue(TryGetComponent<PhysicsBody2DComponent>(out var physicsBody2DComponent), "Must have a PhysicsBody2DComponent");
+            Assert.IsTrue(TryGetComponent<Rigidbody2D>(out var body2D), 
+                $"Must have a {nameof(Rigidbody2D)}");
 
-            var body2D = physicsBody2DComponent.Body2D;
-            _projectileController = new ProjectileController(body2D, projectileParameters, this);
+            _projectileController = new ProjectileController(projectileParameters, this, body2D);
         }
 
         private void OnEnable()
@@ -28,6 +26,12 @@ namespace Game.Projectile
         private void OnDisable()
         {
             _projectileController?.OnDisable();
+        }
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            Debug.Log(col);
+            _projectileController.HandleCollision(col.collider);
         }
 
         private void FixedUpdate()

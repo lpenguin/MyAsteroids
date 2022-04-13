@@ -1,5 +1,4 @@
 ﻿using System;
-using Game.Physics;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -14,16 +13,20 @@ namespace Game.Ufo
         
         private void Start()
         {
-            Assert.IsTrue(TryGetComponent<PhysicsBody2DComponent>(out var physicsBody2DComponent), 
-                "Must have a PhysicsBody2DComponent");
+            Assert.IsTrue(TryGetComponent<Rigidbody2D>(out var body), 
+                $"Must have a {nameof(Rigidbody2D)}");
 
-            var body = physicsBody2DComponent.Body2D;
             _controller = new UfoController(this, definition, body);
         }
 
         private void Update()
         {
             _controller.Update(Time.deltaTime);
+        }
+        
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            _controller.HandleCollision(col.collider);
         }
 
         public Transform Transform => transform;

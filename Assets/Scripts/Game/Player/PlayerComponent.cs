@@ -1,6 +1,4 @@
-﻿using System;
-using Game.Physics;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Game.Player
@@ -26,10 +24,10 @@ namespace Game.Player
 
         private void Start()
         {
-            Assert.IsTrue(TryGetComponent<PhysicsBody2DComponent>(out var physicsBody2DComponent), 
+            Assert.IsTrue(TryGetComponent<Rigidbody2D>(out var physicsBody2DComponent), 
                 "Must have a PhysicsBody2DComponent");
 
-            var body = physicsBody2DComponent.Body2D;
+            var body = physicsBody2DComponent;
             player = new Player
             {
                 Health = 1f,
