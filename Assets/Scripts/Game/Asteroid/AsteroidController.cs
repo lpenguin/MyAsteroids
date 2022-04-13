@@ -1,4 +1,5 @@
-﻿using Game.Physics;
+﻿using Game.GameManager;
+using Game.Physics;
 using Game.Utils;
 using UnityEngine;
 
@@ -36,6 +37,10 @@ namespace Game.Asteroid
         {
             // Debug.Log($"Collision: {collider.gameObject}");
             ReceiveHit();
+            if (collider.TryGetComponent<IHitReceiver>(out var hitReceiver))
+            {
+                hitReceiver.ReceiveHit(_parameters.damage);
+            }
         }
 
         public void ReceiveHit()
@@ -54,6 +59,7 @@ namespace Game.Asteroid
                 }
             }
             _gameComponent.DestroyGameObject();
+            _parameters.playerState.score += _parameters.score;
         }
     }
 }

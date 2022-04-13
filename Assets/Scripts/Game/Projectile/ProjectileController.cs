@@ -45,7 +45,7 @@ namespace Game.Projectile
             _gameComponent.DestroyGameObject();
             if (other.TryGetComponent<IHitReceiver>(out var hitReceiver))
             {
-                hitReceiver.ReceiveHit();
+                hitReceiver.ReceiveHit(1);
             }
         }
     }

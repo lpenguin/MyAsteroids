@@ -18,4 +18,4 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 640
-  gameState: {fileID: 11400000, guid: c7a08418f42c9144dbb1d3311e1df71e, type: 2}
+  playerState: {fileID: 11400000, guid: c7a08418f42c9144dbb1d3311e1df71e, type: 2}

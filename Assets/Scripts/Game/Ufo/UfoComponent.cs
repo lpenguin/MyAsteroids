@@ -35,7 +35,7 @@ namespace Game.Ufo
             Spawner?.Decrement();
         }
 
-        public void ReceiveHit()
+        public void ReceiveHit(float damage)
         {
             _controller?.HitReceived();
         }

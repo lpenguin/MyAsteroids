@@ -3,6 +3,6 @@
     // TODO: make an additional interface "IHasHitReceiver"?
     public interface IHitReceiver
     {
-        void ReceiveHit();
+        void ReceiveHit(float damage);
     }
 }

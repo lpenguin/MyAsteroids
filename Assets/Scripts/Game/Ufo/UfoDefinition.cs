@@ -6,8 +6,12 @@ namespace Game.Ufo
     [CreateAssetMenu(menuName = "MyAsteroids/UFO Definition")]
     public class UfoDefinition: ScriptableObject
     {
-        public GameState gameState;
+        [Header("General")]
+        public PlayerState playerState;
+        public int score;
+        public float damage;
         
+        [Header("Physics")]        
         public float speed = 2;
         public float speedSmoothness = 1;
         public float lookSmoothness = 3;

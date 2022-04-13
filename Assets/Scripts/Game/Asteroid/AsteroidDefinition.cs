@@ -1,4 +1,5 @@
-﻿using Game.Utils;
+﻿using Game.GameManager;
+using Game.Utils;
 using UnityEngine;
 
 namespace Game.Asteroid
@@ -6,9 +7,13 @@ namespace Game.Asteroid
     [CreateAssetMenu(menuName = "MyAsteroids/Asteroid Definition")]
     public class AsteroidDefinition: ScriptableObject
     {
-        [Header("Velocity")]
+        [Header("General")]
+        public PlayerState playerState;
+        public int score;
+        public float damage;
+        
+        [Header("Physics")]
         public RangeFloat linearVelocityRange;
-    
         public RangeFloat angularVelocityRange;
 
         [Header("Spawn")]

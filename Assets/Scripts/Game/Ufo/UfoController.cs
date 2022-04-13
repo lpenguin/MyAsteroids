@@ -21,16 +21,21 @@ namespace Game.Ufo
         private void OnCollision(Collider2D other)
         {
             _component.DestroyGameObject();
+            if (other.TryGetComponent<IHitReceiver>(out var receiver))
+            {
+                receiver.ReceiveHit(_definition.damage);
+            }
         }
 
         public void HitReceived()
         {
             _component.DestroyGameObject();
+            _definition.playerState.score += _definition.score;
         }
         
         public override void Update(float timeStep)
         {
-            var player = _definition.gameState.playerTransform;
+            var player = _definition.playerState.playerTransform;
             var transform = _component.Transform;
             var dir = player.position - transform.position;
 

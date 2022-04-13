@@ -6,11 +6,14 @@ using UnityEngine.Assertions;
 namespace Game.Player
 {
     [AddComponentMenu("MyAsteroids/PlayerComponent")]
-    public class PlayerComponent: MonoBehaviour, IGameComponent
+    public class PlayerComponent: MonoBehaviour, IGameComponent, IHitReceiver
     {
         [SerializeField] 
         private PlayerDefinition playerParameters;
 
+        [SerializeField]
+        private Player player;
+        
         private PlayerController _playerController;
 
         private PlayerControls _controls;
@@ -18,7 +21,7 @@ namespace Game.Player
         private void Awake()
         {
             // TODO: move to controller
-            playerParameters.gameState.playerTransform = transform;
+            playerParameters.playerState.playerTransform = transform;
         }
 
         private void Start()
@@ -27,7 +30,11 @@ namespace Game.Player
                 "Must have a PhysicsBody2DComponent");
 
             var body = physicsBody2DComponent.Body2D;
-            _playerController = new PlayerController(body, _controls, playerParameters, this);
+            player = new Player
+            {
+                Health = 1f,
+            };
+            _playerController = new PlayerController(body, _controls, playerParameters, this, player);
         }
 
         private void OnEnable()
@@ -52,6 +59,11 @@ namespace Game.Player
         public void DestroyGameObject()
         {
             Destroy(gameObject);
+        }
+
+        public void ReceiveHit(float damage)
+        {
+            _playerController.TakeDamage(damage);
         }
     }
 }

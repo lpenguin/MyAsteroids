@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e6ec3bb70d498ea763a8d9937b6843, type: 3}
   m_Name: UFO Definition
   m_EditorClassIdentifier: 
-  thrust: 2
-  gameState: {fileID: 11400000, guid: c7a08418f42c9144dbb1d3311e1df71e, type: 2}
+  playerState: {fileID: 11400000, guid: c7a08418f42c9144dbb1d3311e1df71e, type: 2}
+  score: 250
+  damage: 0.2
+  speed: 2
   speedSmoothness: 1.5
   lookSmoothness: 3

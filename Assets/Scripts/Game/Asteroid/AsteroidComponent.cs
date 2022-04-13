@@ -35,7 +35,7 @@ namespace Game.Asteroid
             Destroy(gameObject);
         }
 
-        public void ReceiveHit()
+        public void ReceiveHit(float damage)
         {
             _asteroidController.ReceiveHit();
         }

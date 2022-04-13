@@ -8,7 +8,7 @@ namespace Game.Player
     {
         public float thrust;
         public float rotationSpeed;
-        public GameState gameState;
+        public PlayerState playerState;
     
         public Weapon.WeaponDefinition primaryWeaponDefinition;
         public Weapon.WeaponDefinition secondaryWeaponDefinition;

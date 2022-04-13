@@ -19,7 +19,7 @@ namespace Game.Weapon
         private LayerMask hitMask;
         
         [SerializeField] 
-        private GameState gameState;
+        private PlayerState playerState;
 
         public override IWeapon CreateWeapon(Transform parent) => new Weapon(this, parent);
 
@@ -36,7 +36,7 @@ namespace Game.Weapon
                 _definition = definition;
                 _parent = parent;
                 _charge = 1f;
-                _definition.gameState.laserCharge.Set(_charge);
+                _definition.playerState.laserCharge = _charge;
             }
 
             public void Shoot()
@@ -61,7 +61,6 @@ namespace Game.Weapon
 
             public void UpdateWeapon(float timeStep)
             {
-                var laserCharge = _definition.gameState.laserCharge;
                 if (!_isShooting)
                 {
                     _charge = Mathf.Min(1f, _charge + _definition.restorePerSec * timeStep);
@@ -75,7 +74,7 @@ namespace Game.Weapon
                     {
                         if (hit.collider != null && hit.collider.TryGetComponent<IHitReceiver>(out var hitReceiver))
                         {
-                            hitReceiver.ReceiveHit();
+                            hitReceiver.ReceiveHit(1);
                         }
                     }
                     
@@ -86,7 +85,7 @@ namespace Game.Weapon
                     }
                 }
                 
-                laserCharge.Set(_charge);
+                _definition.playerState.laserCharge = _charge;
             }
         }
     }
