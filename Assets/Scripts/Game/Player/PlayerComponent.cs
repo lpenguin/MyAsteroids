@@ -10,7 +10,7 @@ namespace Game.Player
         private PlayerDefinition playerParameters;
 
         [SerializeField]
-        private Player player;
+        private PlayerData _playerData;
         
         private PlayerController _playerController;
 
@@ -28,11 +28,11 @@ namespace Game.Player
                 "Must have a PhysicsBody2DComponent");
 
             var body = physicsBody2DComponent;
-            player = new Player
+            _playerData = new PlayerData
             {
                 Health = 1f,
             };
-            _playerController = new PlayerController(body, _controls, playerParameters, this, player);
+            _playerController = new PlayerController(body, _controls, playerParameters, this, _playerData);
         }
 
         private void OnEnable()

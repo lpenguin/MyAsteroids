@@ -4,6 +4,7 @@ using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Game.GameManager
 {
@@ -16,7 +17,7 @@ namespace Game.GameManager
         private GameObject gameOverUi;
 
         [SerializeField]
-        private Text scoreText;
+        private TMPro.TMP_Text scoreText;
 
         private void Start()
         {
@@ -30,9 +31,9 @@ namespace Game.GameManager
         
         private void OnEnable()
         {
-            Assert.IsNotNull(playerState);
-            Assert.IsNotNull(gameOverUi);
-            Assert.IsNotNull(scoreText);
+            Assert.IsNotNull(playerState, $"{nameof(playerState)} must be set");
+            Assert.IsNotNull(gameOverUi, $"{nameof(gameOverUi)} must be set");
+            Assert.IsNotNull(scoreText, $"{nameof(scoreText)} must be set");
             
             playerState.OnPlayerDeath += HandlePlayerDeath;
         }
@@ -46,7 +47,7 @@ namespace Game.GameManager
         {
             Time.timeScale = 0f;
             gameOverUi.SetActive(true);
-            scoreText.text = $"{playerState.score:D}";
+            scoreText.text = $"{playerState.playerData.Score:D}";
         }
 
     }

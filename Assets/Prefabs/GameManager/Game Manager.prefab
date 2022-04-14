@@ -885,7 +885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerState: {fileID: 11400000, guid: c7a08418f42c9144dbb1d3311e1df71e, type: 2}
   gameOverUi: {fileID: 1384428463311491394}
-  scoreText: {fileID: 6890492238404069765}
+  scoreText: {fileID: 3555928182801798747}
 --- !u!1 &5725102087687664973
 GameObject:
   m_ObjectHideFlags: 0

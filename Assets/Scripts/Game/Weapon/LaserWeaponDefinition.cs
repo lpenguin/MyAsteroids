@@ -36,7 +36,8 @@ namespace Game.Weapon
                 _definition = definition;
                 _parent = parent;
                 _charge = 1f;
-                _definition.playerState.laserCharge = _charge;
+                // TODO: get rid of playerState.playerData.LaserCharge
+                _definition.playerState.playerData.LaserCharge = _charge;
             }
 
             public void Shoot()
@@ -85,7 +86,7 @@ namespace Game.Weapon
                     }
                 }
                 
-                _definition.playerState.laserCharge = _charge;
+                _definition.playerState.playerData.LaserCharge = _charge;
             }
         }
     }

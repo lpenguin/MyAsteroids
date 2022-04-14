@@ -8,16 +8,14 @@ namespace Game.Player
         private readonly Rigidbody2D _body2D;
         private readonly PlayerControls _controls;
         private readonly PlayerDefinition _parameters;
-        private readonly Player _player;
 
         private readonly IWeapon _primaryWeapon;
         private readonly IWeapon _secondaryWeapon;
-        public PlayerController(Rigidbody2D body2D, PlayerControls controls, PlayerDefinition parameters, IGameComponent gameComponent, Player player)
+        public PlayerController(Rigidbody2D body2D, PlayerControls controls, PlayerDefinition parameters, IGameComponent gameComponent, PlayerData playerData)
         {
             _body2D = body2D;
             _controls = controls;
             _parameters = parameters;
-            _player = player;
             var tr = gameComponent.Transform;
 
             _primaryWeapon = _parameters.primaryWeaponDefinition.CreateWeapon(tr);
@@ -45,13 +43,12 @@ namespace Game.Player
                 _secondaryWeapon.CancelShoot();
             };
             
-            // TODO: use the playerState.score only for data pass
-            _parameters.playerState.score = 0;
+            // TODO: must not keep old playerData 
+            _parameters.playerState.playerData = new PlayerData();
         }
 
         public override void Update(float timeStep)
         {
-            _parameters.playerState.health = _player.Health;
             var accelerationInput = _controls.Main.Accelerate.ReadValue<float>();
             var rotationInput = _controls.Main.Rotate.ReadValue<float>();
             
@@ -65,10 +62,9 @@ namespace Game.Player
 
         public void TakeDamage(float damage)
         {
-            _player.Health = Mathf.Max(0, _player.Health - damage);
-            _parameters.playerState.health = _player.Health;
+            _parameters.playerState.playerData.Health = Mathf.Max(0, _parameters.playerState.playerData.Health - damage);
             
-            if (_player.Health == 0)
+            if (_parameters.playerState.playerData.Health == 0)
             {
                 _parameters.playerState.TriggerPlayerDeath();
             }

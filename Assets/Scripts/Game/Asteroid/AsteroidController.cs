@@ -45,7 +45,7 @@ namespace Game.Asteroid
                 }
             }
             _gameComponent.DestroyGameObject();
-            _parameters.playerState.score += _parameters.score;
+            _parameters.playerState.playerData.Score += _parameters.score;
         }
     }
 }

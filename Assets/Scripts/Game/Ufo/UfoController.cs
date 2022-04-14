@@ -27,7 +27,7 @@ namespace Game.Ufo
         public void HitReceived()
         {
             _component.DestroyGameObject();
-            _definition.playerState.score += _definition.score;
+            _definition.playerState.playerData.Score += _definition.score;
         }
         
         public override void Update(float timeStep)

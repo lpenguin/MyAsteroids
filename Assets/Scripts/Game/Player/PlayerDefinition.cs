@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Player
 {
-    [CreateAssetMenu(menuName = "MyAsteroids/Player Definition")]
+    [CreateAssetMenu(menuName = "MyAsteroids/PlayerData Definition")]
     public class PlayerDefinition: ScriptableObject
     {
         [Header("General")]

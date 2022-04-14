@@ -28,10 +28,10 @@ namespace Game.UI
 
         private void Update()
         {
-            laserChargeImage.fillAmount = playerState.laserCharge;
-            laserChargeMaxImage.enabled = Math.Abs(playerState.laserCharge - 1.0f) < 0.001;
-            healthImage.fillAmount = playerState.health;
-            scoreText.text = $"{playerState.score:D}";
+            laserChargeImage.fillAmount = playerState.playerData.LaserCharge;
+            laserChargeMaxImage.enabled = Math.Abs(playerState.playerData.LaserCharge - 1.0f) < 0.001;
+            healthImage.fillAmount = playerState.playerData.Health;
+            scoreText.text = $"{playerState.playerData.Score:D}";
         }
     }
 }
