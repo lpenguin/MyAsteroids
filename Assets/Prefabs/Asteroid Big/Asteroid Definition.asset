@@ -26,3 +26,4 @@ MonoBehaviour:
   spawnDistance:
     min: 0.3
     max: 0.7
+  vfxPrefab: {fileID: 2013041818591889358, guid: e76dd190cead88444af5dc7e75b778d5, type: 3}

@@ -15,5 +15,9 @@ namespace Game.Ufo
         public float speed = 2;
         public float speedSmoothness = 1;
         public float lookSmoothness = 3;
+        
+        
+        [Header("VFX")]
+        public GameObject vfxPrefab;
     }
 }

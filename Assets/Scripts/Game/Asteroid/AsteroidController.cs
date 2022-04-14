@@ -44,6 +44,14 @@ namespace Game.Asteroid
                         Quaternion.identity, _gameComponent.Transform.parent);
                 }
             }
+
+            if (_parameters.vfxPrefab != null)
+            {
+                Object.Instantiate(_parameters.vfxPrefab, 
+                    _gameComponent.Transform.position,
+                    _gameComponent.Transform.rotation);
+            }
+            
             _gameComponent.DestroyGameObject();
             _parameters.playerState.playerData.Score += _parameters.score;
         }

@@ -40,7 +40,7 @@ namespace Game.Ufo
 
         public void ReceiveHit(float damage)
         {
-            _controller?.HitReceived();
+            _controller?.ReceiveHit();
         }
 
         public OffScreenSpawner Spawner { get; set; }

@@ -17,15 +17,22 @@ namespace Game.Ufo
 
         public void HandleCollision(Collider2D other)
         {
-            _component.DestroyGameObject();
+            ReceiveHit();
             if (other.TryGetComponent<IHitReceiver>(out var receiver))
             {
                 receiver.ReceiveHit(_definition.damage);
             }
         }
 
-        public void HitReceived()
+        public void ReceiveHit()
         {
+            if (_definition.vfxPrefab != null)
+            {
+                Object.Instantiate(_definition.vfxPrefab, 
+                    _component.Transform.position,
+                    _component.Transform.rotation);
+            }
+            
             _component.DestroyGameObject();
             _definition.playerState.playerData.Score += _definition.score;
         }

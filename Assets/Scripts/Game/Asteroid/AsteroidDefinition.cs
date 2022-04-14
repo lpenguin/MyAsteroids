@@ -21,6 +21,8 @@ namespace Game.Asteroid
         public GameObject spawnOnDamage;
         public int spawnCount;
         public RangeFloat spawnDistance;
-    
+
+        [Header("VFX")]
+        public GameObject vfxPrefab;
     }
 }
