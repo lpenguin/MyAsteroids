@@ -30,7 +30,6 @@ namespace Game.Projectile
 
         private void OnCollisionEnter2D(Collision2D col)
         {
-            Debug.Log(col);
             _projectileController.HandleCollision(col.collider);
         }
 
