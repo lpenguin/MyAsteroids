@@ -8,6 +8,9 @@ namespace Game.Weapon
     {
         [SerializeField]
         private float traceStep = 5;
+
+        [SerializeField]
+        private float firstShotAmmo = 0.33f;
         
         [SerializeField] 
         private float ammoPerSec = 0.3f;
@@ -52,6 +55,9 @@ namespace Game.Weapon
                 {
                     return;
                 }
+
+                _charge -= _definition.firstShotAmmo;
+                
                 _isShooting = true;
                 
                 _effect = Instantiate(_definition.laserEffectPrefab, _parent.position, _parent.rotation, _parent).transform;
