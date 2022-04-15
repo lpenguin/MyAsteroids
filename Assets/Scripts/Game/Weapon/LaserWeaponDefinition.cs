@@ -34,7 +34,8 @@ namespace Game.Weapon
             private float _charge;
             private Transform _effect;
             private Quaternion _lastRotation;
-
+            private RaycastHit2D[] _raycastResults = new RaycastHit2D[16];
+            
             public Weapon(LaserWeaponDefinition definition, Transform parent)
             {
                 _definition = definition;
@@ -94,13 +95,13 @@ namespace Game.Weapon
                 float traceStepRad = Mathf.Deg2Rad * _definition.traceStep;
                 do
                 {
-                    // TODO: all.
-                    // TODO: refactor
                     Vector2 direction = currentRotation * Vector2.up;
-                    
-                    var hits = Physics2D.RaycastAll(_parent.position, direction, Mathf.Infinity, _definition.hitMask);
-                    foreach (var hit in hits)
+                    var hitCount = RayCast(ref _raycastResults, _parent.position, direction, _definition.hitMask);
+
+                    for(int i = 0; i < hitCount; i++)
                     {
+                        var hit = _raycastResults[i];
+                        
                         if (hit.collider != null && 
                             hit.collider.TryGetComponent<IHitReceiver>(out var hitReceiver))
                         {
@@ -110,6 +111,23 @@ namespace Game.Weapon
                     
                     currentRotation = Quaternion.RotateTowards(currentRotation, _lastRotation, traceStepRad);
                 } while (Quaternion.Angle(currentRotation, _lastRotation) >= traceStepRad);
+            }
+
+            private static int RayCast(ref RaycastHit2D[] raycastResults, Vector2 position, Vector2 direction, int mask)
+            {
+                int hitCount;
+                while (true)
+                {
+                    hitCount = Physics2D.RaycastNonAlloc(position, direction, raycastResults, Mathf.Infinity, mask);
+                    if (hitCount <= raycastResults.Length)
+                    {
+                        break;
+                    }
+
+                    raycastResults = new RaycastHit2D[hitCount * 2];
+                }
+
+                return hitCount;
             }
         }
     }
