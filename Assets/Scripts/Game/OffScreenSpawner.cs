@@ -12,6 +12,7 @@ namespace Game
             OffScreenSpawner Spawner { get; set; }
         }
         
+        // TODO: review this
         [SerializeField] 
         private int maxInstances = 10;
         
@@ -63,7 +64,7 @@ namespace Game
         private void InstantiatePrefabOffscreen(GameObject prefab)
         {
             var topLeft = _camera.ViewportToWorldPoint(new Vector2(0, 0));
-            var bottomRight = _camera.ViewportToWorldPoint(new Vector2(0, 0));
+            var bottomRight = _camera.ViewportToWorldPoint(new Vector2(1, 1));
             Vector2 size = Vector2.zero;
             if (prefab.TryGetComponent<SpriteRenderer>(out var spriteRenderer))
             {
@@ -74,15 +75,20 @@ namespace Game
             if (Random.Range(0, 1) < 0.5f)
             {
                 // Vertical segments
-                float x = Random.Range(topLeft.x, bottomRight.x);
-                float y = Random.Range(0, 1) < 0.5f ? -size.y / 2 : bottomRight.y + size.y / 2; 
+                float x = Random.Range(0, 1) < 0.5f ? 
+                    topLeft.x - size.x/2: 
+                    bottomRight.x + size.x/2;
+
+                float y = Random.Range(topLeft.y, bottomRight.y); 
                 position = new Vector2(x, y);
             }
             else
             {
                 // Horizontal segments
-                float x = Random.Range(0, 1) < 0.5f ? -size.x / 2 : bottomRight.x + size.x / 2; 
-                float y = Random.Range(topLeft.y, bottomRight.y);
+                float x = Random.Range(topLeft.x, bottomRight.x); 
+                float y =Random.Range(0, 1) < 0.5f ? 
+                    topLeft.y - size.y/2: 
+                    bottomRight.y + size.y/2;
                 position = new Vector2(x, y);
             }
 
