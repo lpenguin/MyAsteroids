@@ -1,19 +1,18 @@
 ﻿using Game.Utils;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.Asteroid
 {
     public class AsteroidController: GameController
     {
-        private readonly Rigidbody2D _body2D;
         private readonly AsteroidDefinition _parameters;
         private readonly IGameComponent _gameComponent;
 
         public AsteroidController(IGameComponent gameComponent, AsteroidDefinition parameters, Rigidbody2D body2D)
         {
-            _body2D = body2D;
-            _body2D.velocity = parameters.linearVelocityRange.RandomVector2();
-            _body2D.angularVelocity = parameters.angularVelocityRange.RandomFloat();
+            body2D.velocity = parameters.linearVelocityRange.RandomVector2();
+            body2D.angularVelocity = parameters.angularVelocityRange.RandomFloat();
             
             _parameters = parameters;
             _gameComponent = gameComponent;
@@ -37,10 +36,9 @@ namespace Game.Asteroid
                 
                 for (int i = 0; i < _parameters.spawnCount; i++)
                 {
-                    // TODO: duplicated code. Move to FloatRange extension
                     var offset = _parameters.spawnDistance.RandomVector2();
 
-                    var go = Object.Instantiate(_parameters.spawnOnDamage, initialPosition + offset,
+                    Object.Instantiate(_parameters.spawnOnDamage, initialPosition + offset,
                         Quaternion.identity, _gameComponent.Transform.parent);
                 }
             }

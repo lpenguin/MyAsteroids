@@ -25,14 +25,5 @@ namespace Game.Projectile
                 _gameComponent.DestroyGameObject();
             }
         }
-
-        public void HandleCollision(Collider2D other)
-        {
-            _gameComponent.DestroyGameObject();
-            if (other.TryGetComponent<IHitReceiver>(out var hitReceiver))
-            {
-                hitReceiver.ReceiveHit(1);
-            }
-        }
     }
 }

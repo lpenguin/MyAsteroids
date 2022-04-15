@@ -28,11 +28,6 @@ namespace Game.Projectile
             _projectileController?.OnDisable();
         }
 
-        private void OnCollisionEnter2D(Collision2D col)
-        {
-            _projectileController.HandleCollision(col.collider);
-        }
-
         private void FixedUpdate()
         {
             _projectileController.PhysicsUpdate(Time.fixedDeltaTime);
