@@ -12,7 +12,7 @@ namespace Game.Asteroid
 
         private AsteroidController _asteroidController;
 
-        private void Start()
+        private void Awake()
         {
             Assert.IsTrue(TryGetComponent<Rigidbody2D>(out var body), 
                 $"Must have a ${nameof(Rigidbody2D)}");

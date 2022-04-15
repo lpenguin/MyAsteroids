@@ -11,7 +11,7 @@ namespace Game.Ufo
 
         private UfoController _controller;
         
-        private void Start()
+        private void Awake()
         {
             Assert.IsTrue(TryGetComponent<Rigidbody2D>(out var body), 
                 $"Must have a {nameof(Rigidbody2D)}");
