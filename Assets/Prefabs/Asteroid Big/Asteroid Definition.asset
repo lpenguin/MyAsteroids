@@ -22,7 +22,7 @@ MonoBehaviour:
     min: 50
     max: 150
   spawnOnDamage: {fileID: 7773759646853163060, guid: 98a9bea1caacfb544ab593eb92941fbf, type: 3}
-  spawnCount: 2
+  spawnCount: 1
   spawnDistance:
     min: 0.3
     max: 0.7

@@ -29,11 +29,16 @@ namespace Game.Weapon
             
             public void Shoot()
             {
+                _isShooting = true;
+                MakeAShot();
+            }
+
+            private void MakeAShot()
+            {
                 _definition.projectilePrefab.InstantiateAsync(_parent.position, _parent.rotation);
                 _cooldown = _definition.period;
-                _isShooting = true;
             }
-            
+
             public void CancelShoot()
             {
                 _isShooting = false;
@@ -49,8 +54,7 @@ namespace Game.Weapon
                 _cooldown -= deltaTime;
                 if (_cooldown <= 0)
                 {
-                    _definition.projectilePrefab.InstantiateAsync(_parent.position, _parent.rotation);
-                    _cooldown = _definition.period;
+                    MakeAShot();
                 }
             }
         }

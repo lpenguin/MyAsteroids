@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player Definition
   m_EditorClassIdentifier: 
   playerState: {fileID: 11400000, guid: c7a08418f42c9144dbb1d3311e1df71e, type: 2}
-  thrust: 4
+  thrust: 6
   drag: 0.4
   maxSpeed: 4
   rotationSpeed: 250

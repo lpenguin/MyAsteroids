@@ -49,6 +49,7 @@ namespace Game.Weapon
                 _isShooting = true;
                 
                 _effect = Instantiate(_definition.laserEffectPrefab, _parent.position, _parent.rotation, _parent).transform;
+                
             }
 
             public void CancelShoot()
