@@ -53,7 +53,7 @@ namespace Game.Player
             var rotationInput = _controls.Main.Rotate.ReadValue<float>();
             
             Vector2 force = (Vector2)_body2D.transform.up * accelerationInput * _parameters.thrust 
-                            - _body2D.velocity * _parameters.drag * timeStep ;
+                            - _body2D.velocity * _parameters.drag ;
             _body2D.velocity = Vector2.ClampMagnitude(_body2D.velocity + force * timeStep, _parameters.maxSpeed);
             _body2D.angularVelocity = -rotationInput * _parameters.rotationSpeed;
             
