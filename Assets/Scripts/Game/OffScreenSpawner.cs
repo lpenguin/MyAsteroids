@@ -76,8 +76,8 @@ namespace Game
             {
                 // Vertical segments
                 float x = Random.Range(0, 1) < 0.5f ? 
-                    topLeft.x - size.x/2: 
-                    bottomRight.x + size.x/2;
+                    topLeft.x - size.x * 0.45f: 
+                    bottomRight.x + size.x * 0.45f;
 
                 float y = Random.Range(topLeft.y, bottomRight.y); 
                 position = new Vector2(x, y);
@@ -87,8 +87,8 @@ namespace Game
                 // Horizontal segments
                 float x = Random.Range(topLeft.x, bottomRight.x); 
                 float y =Random.Range(0, 1) < 0.5f ? 
-                    topLeft.y - size.y/2: 
-                    bottomRight.y + size.y/2;
+                    topLeft.y - size.y * 0.45f: 
+                    bottomRight.y + size.y * 0.45f;
                 position = new Vector2(x, y);
             }
 
