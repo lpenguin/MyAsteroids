@@ -17,5 +17,5 @@ MonoBehaviour:
   damage: 0.2
   speed: 2
   speedSmoothness: 1.5
-  lookSmoothness: 3
+  rotationSpeed: 90
   vfxPrefab: {fileID: 2013041818591889358, guid: 879407711b3622d47b73a2b9c5053f62, type: 3}

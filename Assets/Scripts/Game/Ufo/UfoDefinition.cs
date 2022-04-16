@@ -14,7 +14,7 @@ namespace Game.Ufo
         [Header("Physics")]        
         public float speed = 2;
         public float speedSmoothness = 1;
-        public float lookSmoothness = 3;
+        public float rotationSpeed = 3f;
         
         
         [Header("VFX")]

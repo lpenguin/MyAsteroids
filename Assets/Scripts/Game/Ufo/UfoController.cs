@@ -13,6 +13,7 @@ namespace Game.Ufo
             _component = component;
             _definition = definition;
             _body2D = body2D;
+            _body2D.angularVelocity = definition.rotationSpeed;
         }
 
         public void HandleCollision(Collider2D other)
@@ -43,10 +44,6 @@ namespace Game.Ufo
             var transform = _component.Transform;
             var dir = player.position - transform.position;
 
-            
-            float lookAngle = Vector2.SignedAngle(Vector2.up, dir);
-            
-            _body2D.MoveRotation(Mathf.LerpAngle(_body2D.rotation, lookAngle, _definition.lookSmoothness * timeStep));
             _body2D.velocity = Vector2.Lerp(_body2D.velocity, (dir.normalized) * _definition.speed, _definition.speedSmoothness * timeStep);
             
         }
