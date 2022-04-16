@@ -11,7 +11,8 @@
                     "id": "9bbfbdf5-3903-437e-b58f-7d3e03d9b81c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Accelerate",
@@ -19,7 +20,8 @@
                     "id": "bfe3eec7-5655-4fde-b8f5-da2c1f5b9be5",
                     "expectedControlType": "Analog",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Rotate",
@@ -27,7 +29,8 @@
                     "id": "21e34a02-72ed-452e-9c42-72cf92d89a6a",
                     "expectedControlType": "Analog",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Shoot Secondary",
@@ -35,7 +38,17 @@
                     "id": "fef3cff8-f431-493d-b5cd-d2ace1689db5",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "74f17176-0f66-48db-967b-c97790b5ee72",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -256,6 +269,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot Secondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd465161-2168-44ec-aae8-0fe51548c03b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dfbf3fa1-16fe-45e1-ba14-14b6f39ed1ee",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

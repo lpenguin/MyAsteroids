@@ -64,6 +64,15 @@ namespace Game
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""74f17176-0f66-48db-967b-c97790b5ee72"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -286,6 +295,28 @@ namespace Game
                     ""action"": ""Shoot Secondary"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd465161-2168-44ec-aae8-0fe51548c03b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfbf3fa1-16fe-45e1-ba14-14b6f39ed1ee"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -298,6 +329,7 @@ namespace Game
             m_Main_Accelerate = m_Main.FindAction("Accelerate", throwIfNotFound: true);
             m_Main_Rotate = m_Main.FindAction("Rotate", throwIfNotFound: true);
             m_Main_ShootSecondary = m_Main.FindAction("Shoot Secondary", throwIfNotFound: true);
+            m_Main_Pause = m_Main.FindAction("Pause", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -361,6 +393,7 @@ namespace Game
         private readonly InputAction m_Main_Accelerate;
         private readonly InputAction m_Main_Rotate;
         private readonly InputAction m_Main_ShootSecondary;
+        private readonly InputAction m_Main_Pause;
         public struct MainActions
         {
             private @PlayerControls m_Wrapper;
@@ -369,6 +402,7 @@ namespace Game
             public InputAction @Accelerate => m_Wrapper.m_Main_Accelerate;
             public InputAction @Rotate => m_Wrapper.m_Main_Rotate;
             public InputAction @ShootSecondary => m_Wrapper.m_Main_ShootSecondary;
+            public InputAction @Pause => m_Wrapper.m_Main_Pause;
             public InputActionMap Get() { return m_Wrapper.m_Main; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -390,6 +424,9 @@ namespace Game
                     @ShootSecondary.started -= m_Wrapper.m_MainActionsCallbackInterface.OnShootSecondary;
                     @ShootSecondary.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnShootSecondary;
                     @ShootSecondary.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnShootSecondary;
+                    @Pause.started -= m_Wrapper.m_MainActionsCallbackInterface.OnPause;
+                    @Pause.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnPause;
+                    @Pause.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnPause;
                 }
                 m_Wrapper.m_MainActionsCallbackInterface = instance;
                 if (instance != null)
@@ -406,6 +443,9 @@ namespace Game
                     @ShootSecondary.started += instance.OnShootSecondary;
                     @ShootSecondary.performed += instance.OnShootSecondary;
                     @ShootSecondary.canceled += instance.OnShootSecondary;
+                    @Pause.started += instance.OnPause;
+                    @Pause.performed += instance.OnPause;
+                    @Pause.canceled += instance.OnPause;
                 }
             }
         }
@@ -416,6 +456,7 @@ namespace Game
             void OnAccelerate(InputAction.CallbackContext context);
             void OnRotate(InputAction.CallbackContext context);
             void OnShootSecondary(InputAction.CallbackContext context);
+            void OnPause(InputAction.CallbackContext context);
         }
     }
 }
