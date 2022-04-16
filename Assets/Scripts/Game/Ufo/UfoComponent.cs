@@ -4,7 +4,7 @@ using UnityEngine.Assertions;
 
 namespace Game.Ufo
 {
-    public class UfoComponent: MonoBehaviour, IGameComponent, IHitReceiver, OffScreenSpawner.IHasSpawnerParent
+    public class UfoComponent: MonoBehaviour, IGameComponent, IHitReceiver
     {
         [SerializeField] 
         private UfoDefinition definition;
@@ -34,15 +34,11 @@ namespace Game.Ufo
         public void DestroyGameObject()
         {
             Destroy(gameObject);
-            // TODO: move to controller
-            Spawner?.Decrement();
         }
 
         public void ReceiveHit(float damage)
         {
             _controller?.ReceiveHit();
         }
-
-        public OffScreenSpawner Spawner { get; set; }
     }
 }

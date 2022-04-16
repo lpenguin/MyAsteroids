@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Game
+namespace Game.Spawners
 {
     public class OffScreenSpawner: MonoBehaviour
     {
-        public interface IHasSpawnerParent
-        {
-            OffScreenSpawner Spawner { get; set; }
-        }
-        
-        // TODO: review this
-        [SerializeField] 
-        private int maxInstances = 10;
-        
         [SerializeField] 
         private float interval = 2f;
         
@@ -53,11 +43,8 @@ namespace Game
             {
                 yield return new WaitForSeconds(interval);
 
-                if (_instances <= maxInstances)
-                {
-                    InstantiatePrefabOffscreen(prefabs[Random.Range(0, prefabs.Length)]);
-                    _instances += 1;
-                }
+                InstantiatePrefabOffscreen(prefabs[Random.Range(0, prefabs.Length)]);
+                _instances += 1;
             }
         }
 
@@ -71,6 +58,7 @@ namespace Game
                 size = spriteRenderer.bounds.size;
             }
 
+            // TODO: review this 
             Vector2 position;
             if (Random.Range(0, 1) < 0.5f)
             {
@@ -92,11 +80,7 @@ namespace Game
                 position = new Vector2(x, y);
             }
 
-            var go = Instantiate(prefab, position, Quaternion.identity, transform);
-            if (go.TryGetComponent<IHasSpawnerParent>(out var hasSpawnerParent))
-            {
-                hasSpawnerParent.Spawner = this;
-            }
+            Instantiate(prefab, position, Quaternion.identity, transform);
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 namespace Game.Asteroid
 {
     [AddComponentMenu("MyAsteroids/AsteroidComponent")]
-    public class AsteroidComponent: MonoBehaviour, OffScreenSpawner.IHasSpawnerParent, IGameComponent, IHitReceiver
+    public class AsteroidComponent: MonoBehaviour, IGameComponent, IHitReceiver
     {
         [SerializeField] 
         private AsteroidDefinition parameters;
@@ -24,15 +24,7 @@ namespace Game.Asteroid
         {
             _asteroidController.HandleCollision(col.collider);
         }
-
-        private void OnDestroy()
-        {
-            // TODO: move to controller
-            Spawner?.Decrement();
-        }
-
-        // TODO: move to controller
-        public OffScreenSpawner Spawner { get; set; }
+        
         public Transform Transform => transform;
         public void DestroyGameObject()
         {
