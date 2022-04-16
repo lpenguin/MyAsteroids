@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Input;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Game.Player
@@ -13,8 +14,6 @@ namespace Game.Player
         private PlayerData _playerData;
         
         private PlayerController _playerController;
-
-        private PlayerControls _controls;
 
         private void Awake()
         {
@@ -32,18 +31,7 @@ namespace Game.Player
             {
                 Health = 1f,
             };
-            _playerController = new PlayerController(body, _controls, playerParameters, this, _playerData);
-        }
-
-        private void OnEnable()
-        {
-            _controls ??= new PlayerControls();
-            _controls.Enable();
-        }
-
-        private void OnDisable()
-        {
-            _controls.Disable();
+            _playerController = new PlayerController(body, playerParameters, this, _playerData);
         }
 
         private void Update()
