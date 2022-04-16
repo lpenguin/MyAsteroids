@@ -25,5 +25,10 @@ namespace Game.Projectile
                 _gameComponent.DestroyGameObject();
             }
         }
+
+        public void HandleCollisionEnter(Collision2D col)
+        {
+            _gameComponent.DestroyGameObject();
+        }
     }
 }

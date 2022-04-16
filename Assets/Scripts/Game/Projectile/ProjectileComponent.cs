@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Game.Projectile
@@ -36,6 +37,11 @@ namespace Game.Projectile
         private void Update()
         {
             _projectileController.Update(Time.deltaTime);
+        }
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            _projectileController.HandleCollisionEnter(col);
         }
 
         public Transform Transform => transform;
