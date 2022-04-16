@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    // Do we need this?
+    // TODO: Do we need this?
     public interface IGameComponent
     {
         Transform Transform { get; }
