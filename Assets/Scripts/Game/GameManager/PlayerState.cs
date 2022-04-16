@@ -15,6 +15,10 @@ namespace Game.GameManager
         [NonSerialized]
         public Transform playerTransform;
 
+        [NonSerialized]
+        public AudioListener audioListener;
+
+        // TODO: Use event bus?
         public event Action OnPlayerDeath;
 
         public void TriggerPlayerDeath()
