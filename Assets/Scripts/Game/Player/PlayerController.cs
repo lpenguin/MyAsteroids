@@ -1,5 +1,7 @@
-﻿using Game.HitReceiver;
+﻿using Game.Events;
+using Game.HitReceiver;
 using Game.Input;
+using Game.Utils;
 using Game.Weapon;
 using UnityEngine;
 
@@ -10,20 +12,43 @@ namespace Game.Player
         private readonly Rigidbody2D _body2D;
         private readonly PlayerDefinition _parameters;
 
+        // TODO: weapon set?
         private readonly IWeapon _primaryWeapon;
         private readonly IWeapon _secondaryWeapon;
+        public ObservableFloat Health { get; } = new ObservableFloat(1f);
+
         public PlayerController(Rigidbody2D body2D, PlayerDefinition parameters, IGameComponent gameComponent, PlayerData playerData)
         {
             _body2D = body2D;
             _parameters = parameters;
             var tr = gameComponent.Transform;
 
+            _parameters.playerState.eventBus.PublishEvent(new PlayerShipAddedEvent(
+                _parameters.playerState.playerData,
+                this
+                ));
+            
             _primaryWeapon = _parameters.primaryWeaponDefinition.CreateWeapon(tr, playerData);
             _secondaryWeapon = _parameters.secondaryWeaponDefinition.CreateWeapon(tr, playerData);
 
+            // TODO: move this to the IWeapon factory?
+            _parameters.playerState.eventBus.PublishEvent(new PlayerShipWeaponAddedEvent(
+                _parameters.playerState.playerData,
+                this,
+                _primaryWeapon
+            ));
+            
+            _parameters.playerState.eventBus.PublishEvent(new PlayerShipWeaponAddedEvent(
+                _parameters.playerState.playerData,
+                this,
+                _secondaryWeapon
+            ));
+            
             PlayerControls.MainActions mainActions = InputManager.Instance.Controls.Main;
             
             var shootControl = mainActions.Shoot;
+            // TODO: unbind events
+            // TODO: move controls processing to the separate controller
             shootControl.performed += _ =>
             {
                 _primaryWeapon.Shoot();
@@ -44,10 +69,9 @@ namespace Game.Player
             {
                 _secondaryWeapon.CancelShoot();
             };
-            
-            // TODO: must not keep old playerData 
-            _parameters.playerState.playerData = playerData;
         }
+
+        
 
         public override void Update(float timeStep)
         {
@@ -65,11 +89,11 @@ namespace Game.Player
 
         public void TakeDamage(float damage)
         {
-            _parameters.playerState.playerData.Health = Mathf.Max(0, _parameters.playerState.playerData.Health - damage);
+            Health.Value = Mathf.Max(0, Health.Value - damage);
             
-            if (_parameters.playerState.playerData.Health == 0)
+            if (Health.Value == 0)
             {
-                _parameters.playerState.TriggerPlayerDeath();
+                _parameters.playerState.eventBus.PublishEvent(new PlayerShipDestroyedEvent(_parameters.playerState.playerData, this));
             }
         }
         

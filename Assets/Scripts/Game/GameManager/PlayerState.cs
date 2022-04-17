@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Events;
 using Game.Player;
 using UnityEngine;
 
@@ -18,12 +19,8 @@ namespace Game.GameManager
         [NonSerialized]
         public AudioListener audioListener;
 
-        // TODO: Use event bus?
-        public event Action OnPlayerDeath;
-
-        public void TriggerPlayerDeath()
-        {
-            OnPlayerDeath?.Invoke();
-        }
+        // TODO: is it per player event bus or global one?
+        [NonSerialized]
+        public EventBus eventBus;
     }
 }

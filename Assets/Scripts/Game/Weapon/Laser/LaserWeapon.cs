@@ -1,5 +1,6 @@
 ﻿using Game.HitReceiver;
 using Game.Player;
+using Game.Utils;
 using UnityEngine;
 
 namespace Game.Weapon.Laser
@@ -10,7 +11,7 @@ namespace Game.Weapon.Laser
         private readonly Transform _parent;
         private readonly PlayerData _playerData;
         private bool _isShooting;
-        private float _charge;
+        private ObservableFloat _charge;
         private Transform _effect;
         private Quaternion _lastRotation;
         private RaycastHit2D[] _raycastResults = new RaycastHit2D[16];
@@ -21,19 +22,19 @@ namespace Game.Weapon.Laser
             _parent = parent;
             _playerData = playerData;
             _lastRotation = _parent.rotation;
-            _charge = 1f;
-            // TODO: get rid of playerState.playerData.LaserCharge
-            _definition.playerState.playerData.LaserCharge = _charge;
+            _charge = new ObservableFloat(1f);
         }
+
+        public ObservableFloat Charge => _charge;
 
         public void Shoot()
         {
-            if (_charge < 0.9)
+            if (_charge.Value < 0.9)
             {
                 return;
             }
 
-            _charge -= _definition.firstShotAmmo;
+            _charge.Value -= _definition.firstShotAmmo;
 
             _isShooting = true;
 
@@ -53,21 +54,20 @@ namespace Game.Weapon.Laser
         {
             if (!_isShooting)
             {
-                _charge = Mathf.Min(1f, _charge + _definition.restorePerSec * timeStep);
+                _charge.Value = Mathf.Min(1f, _charge.Value + _definition.restorePerSec * timeStep);
             }
             else
             {
                 ShootRays();
 
-                _charge = Mathf.Max(0, _charge - _definition.ammoPerSec * timeStep);
-                if (_charge == 0)
+                _charge.Value = Mathf.Max(0, _charge.Value - _definition.ammoPerSec * timeStep);
+                if (_charge.Value == 0)
                 {
                     CancelShoot();
                 }
             }
 
             _lastRotation = _parent.rotation;
-            _definition.playerState.playerData.LaserCharge = _charge;
         }
 
         private void ShootRays()

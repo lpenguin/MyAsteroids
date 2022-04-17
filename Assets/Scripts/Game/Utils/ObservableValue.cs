@@ -9,50 +9,53 @@ namespace Game.Utils
 
         public event ValueChanged OnValueChanged;
 
-        [SerializeField]
         private T _value;
-        
+
+        public T Value
+        {
+            get => _value;
+            set
+            {
+                bool changed = !_value.Equals(value);
+                _value = value;
+                if (changed)
+                {
+                    OnValueChanged?.Invoke(value);    
+                }
+            }
+        }
+
         public ObservableValue():this(default)
         {
-             
+             Debug.Log($"{GetType().Name} created (default)");
         }
         
         public ObservableValue(T initial)
         {
+            Debug.Log($"{GetType().Name} created ({initial})");
             _value = initial;
-        }
-
-        public T Get()
-        {
-            return _value;
-        }
-        
-        public void Set(T value)
-        {
-            bool changed = !_value.Equals(value);
-            if (changed)
-            {
-                _value = value;
-                OnValueChanged?.Invoke(_value);
-            }
         }
     }
     
     [Serializable]
     public class ObservableFloat: ObservableValue<float>
     {
-        
+        public ObservableFloat(float value)
+            : base(value){}
+
     }
     
     [Serializable]
     public class ObservableInt: ObservableValue<int>
     {
-        
+        public ObservableInt(int value)
+            : base(value){}
     }
     
     [Serializable]
     public class ObservableVector2: ObservableValue<Vector2>
     {
-        
+        public ObservableVector2(Vector2 value)
+            : base(value){}
     }
 }

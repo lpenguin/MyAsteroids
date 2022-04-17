@@ -42,7 +42,7 @@ namespace Game.Ufo
             // TODO: ugly null check, use NullObject
             if (receiveHitData.PlayerData != null)
             {
-                receiveHitData.PlayerData.Score += _definition.score;    
+                receiveHitData.PlayerData.Score.Value += _definition.score;    
             }
         }
         

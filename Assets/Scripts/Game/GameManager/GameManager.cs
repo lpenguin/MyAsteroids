@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Events;
 using Game.Input;
 using Game.Music;
 using UnityEngine;
@@ -21,7 +22,13 @@ namespace Game.GameManager
         private GameObject pauseUi;
 
         private bool _isPaused;
-        
+
+        private void Awake()
+        {
+            // TODO: use ServiceLocator pattern
+            playerState.eventBus = new EventBus();
+        }
+
         private void Start()
         {
             gameOverUi.SetActive(false);
@@ -64,7 +71,7 @@ namespace Game.GameManager
             Assert.IsNotNull(playerState.audioListener, $"Cannot find {nameof(AudioListener)} in the scene");
 
             
-            playerState.OnPlayerDeath += HandlePlayerDeath;
+            playerState.eventBus.Subscribe<PlayerShipDestroyedEvent>(HandlePlayerDeath);
             InputManager.Instance.Controls.Main.Pause.performed += OnPausePresed;
         }
 
@@ -84,10 +91,10 @@ namespace Game.GameManager
         private void OnDisable()
         {
             InputManager.Instance.Controls.Main.Pause.performed -= OnPausePresed;
-            playerState.OnPlayerDeath -= HandlePlayerDeath;
+            playerState.eventBus.Unsubscribe<PlayerShipDestroyedEvent>(HandlePlayerDeath);
         }
         
-        private void HandlePlayerDeath()
+        private void HandlePlayerDeath(PlayerShipDestroyedEvent _)
         {
             Time.timeScale = 0f;
             gameOverUi.SetActive(true);

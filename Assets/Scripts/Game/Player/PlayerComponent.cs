@@ -29,10 +29,9 @@ namespace Game.Player
                 "Must have a PhysicsBody2DComponent");
 
             var body = physicsBody2DComponent;
-            _playerData = new PlayerData
-            {
-                Health = 1f,
-            };
+            // TODO: move initialization out PlayerShipController
+            _playerData = playerParameters.playerState.playerData;
+            _playerData.Score.Value = 0;
             _playerController = new PlayerController(body, playerParameters, this, _playerData);
         }
 

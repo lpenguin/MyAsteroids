@@ -49,7 +49,7 @@ namespace Game.Asteroid
             
             if (receiveHitData.PlayerData != null)
             {
-                receiveHitData.PlayerData.Score += _definition.score;    
+                receiveHitData.PlayerData.Score.Value += _definition.score;    
             }
             _gameComponent.DestroyGameObject();
         }

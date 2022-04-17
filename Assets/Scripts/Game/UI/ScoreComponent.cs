@@ -12,7 +12,7 @@ namespace Game.UI
         private PlayerState playerState;
 
         private TMP_Text scoreText;
-        private void Start()
+        private void Awake()
         {
             Assert.IsNotNull(playerState, $"{nameof(playerState)} must be set");
             
@@ -20,13 +20,25 @@ namespace Game.UI
             Assert.IsNotNull(scoreText, $"{nameof(scoreText)} must be set");
         }
 
-        private void Update()
+        private void OnEnable()
         {
-            if (scoreText != null &&
-                playerState != null)
+            if (playerState != null)
             {
-                scoreText.text = $"{playerState.playerData.Score:D}";
+                playerState.playerData.Score.OnValueChanged += HandleScoreChanged;
             }
+        }
+        
+        private void OnDisable()
+        {
+            if (playerState != null)
+            {
+                playerState.playerData.Score.OnValueChanged -= HandleScoreChanged;
+            }
+        }
+
+        private void HandleScoreChanged(int score)
+        {
+            scoreText.text = $"{score:D}";
         }
     }
 }
