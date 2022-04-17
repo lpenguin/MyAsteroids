@@ -1,6 +1,6 @@
 ﻿using Game.HitReceiver;
 using Game.Utils;
-using Game.Weapon;
+using Game.Weapon.Laser;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
