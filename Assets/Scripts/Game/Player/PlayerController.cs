@@ -1,4 +1,5 @@
-﻿using Game.Input;
+﻿using Game.HitReceiver;
+using Game.Input;
 using Game.Weapon;
 using UnityEngine;
 
@@ -76,6 +77,19 @@ namespace Game.Player
         {
             _primaryWeapon.UpdateWeapon(timeStep);
             _secondaryWeapon.UpdateWeapon(timeStep);
+        }
+
+        public void HandleCollisionEnter(Collision2D col)
+        {
+            if (col.collider.TryGetComponent<IHitReceiver>(out var hitReceiver))
+            {
+                hitReceiver.ReceiveHit(new ReceiveHitData
+                {
+                    Damage = 1000.0f, // TODO: melee weapon? 
+                    PlayerData = _parameters.playerState.playerData,
+                    Owner = this,
+                });
+            }
         }
     }
 }

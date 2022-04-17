@@ -35,7 +35,7 @@ namespace Game.Asteroid
         public void ReceiveHit(ReceiveHitData receiveHitData)
         {
             if (_definition.spawnOnDamage != null 
-                && receiveHitData.Owner is LaserWeapon)
+                && receiveHitData.Owner is not LaserWeapon)
             {
                 SpawnAsteroids();
             }

@@ -1,4 +1,5 @@
-﻿using Game.HitReceiver;
+﻿using System;
+using Game.HitReceiver;
 using Game.Input;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -40,6 +41,10 @@ namespace Game.Player
             _playerController.Update(Time.deltaTime);
         }
 
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            _playerController.HandleCollisionEnter(col);
+        }
 
         public Transform Transform => transform;
         
@@ -48,6 +53,7 @@ namespace Game.Player
             Destroy(gameObject);
         }
 
+        
         // TODO:
         public void ReceiveHit(ReceiveHitData receiveHitData)
         {
