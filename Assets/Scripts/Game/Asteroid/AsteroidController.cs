@@ -1,4 +1,6 @@
-﻿using Game.Utils;
+﻿using Game.HitReceiver;
+using Game.Utils;
+using Game.Weapon;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -6,52 +8,63 @@ namespace Game.Asteroid
 {
     public class AsteroidController: GameController
     {
-        private readonly AsteroidDefinition _parameters;
+        private readonly AsteroidDefinition _definition;
         private readonly IGameComponent _gameComponent;
 
-        public AsteroidController(IGameComponent gameComponent, AsteroidDefinition parameters, Rigidbody2D body2D)
+        public AsteroidController(IGameComponent gameComponent, AsteroidDefinition definition, Rigidbody2D body2D)
         {
-            body2D.velocity = parameters.linearVelocityRange.RandomVector2();
-            body2D.angularVelocity = parameters.angularVelocityRange.RandomFloat();
+            body2D.velocity = definition.linearVelocityRange.RandomVector2();
+            body2D.angularVelocity = definition.angularVelocityRange.RandomFloat();
             
-            _parameters = parameters;
+            _definition = definition;
             _gameComponent = gameComponent;
         }
 
 
         public void HandleCollision(Collider2D collider)
         {
-            ReceiveHit();
             if (collider.TryGetComponent<IHitReceiver>(out var hitReceiver))
             {
-                hitReceiver.ReceiveHit(_parameters.damage);
+                hitReceiver.ReceiveHit(new ReceiveHitData
+                {
+                    Damage = _definition.damage,
+                });
             }
         }
 
-        public void ReceiveHit()
+        public void ReceiveHit(ReceiveHitData receiveHitData)
         {
-            if (_parameters.spawnOnDamage != null)
+            if (_definition.spawnOnDamage != null 
+                && receiveHitData.Owner is LaserWeapon)
             {
-                Vector2 initialPosition = _gameComponent.Transform.position;
-                
-                for (int i = 0; i < _parameters.spawnCount; i++)
-                {
-                    var offset = _parameters.spawnDistance.RandomVector2();
-
-                    Object.Instantiate(_parameters.spawnOnDamage, initialPosition + offset,
-                        Quaternion.identity, _gameComponent.Transform.parent);
-                }
+                SpawnAsteroids();
             }
 
-            if (_parameters.vfxPrefab != null)
+            if (_definition.vfxPrefab != null)
             {
-                Object.Instantiate(_parameters.vfxPrefab, 
+                Object.Instantiate(_definition.vfxPrefab, 
                     _gameComponent.Transform.position,
                     _gameComponent.Transform.rotation);
             }
             
+            if (receiveHitData.PlayerData != null)
+            {
+                receiveHitData.PlayerData.Score += _definition.score;    
+            }
             _gameComponent.DestroyGameObject();
-            _parameters.playerState.playerData.Score += _parameters.score;
+        }
+
+        private void SpawnAsteroids()
+        {
+            Vector2 initialPosition = _gameComponent.Transform.position;
+
+            for (int i = 0; i < _definition.spawnCount; i++)
+            {
+                var offset = _definition.spawnDistance.RandomVector2();
+
+                Object.Instantiate(_definition.spawnOnDamage, initialPosition + offset,
+                    Quaternion.identity, _gameComponent.Transform.parent);
+            }
         }
     }
 }

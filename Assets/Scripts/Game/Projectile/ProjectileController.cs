@@ -1,34 +1,33 @@
-﻿using UnityEngine;
+﻿using Game.HitReceiver;
+using UnityEngine;
 
 namespace Game.Projectile
 {
     public class ProjectileController: GameController
     {
 
-        private readonly ProjectileDefinition _parameters;
         private readonly IGameComponent _gameComponent;
-        private float _elapsedTime;
+        private readonly ReceiveHitData _receiveHitData;
         
-        public ProjectileController(ProjectileDefinition parameters, IGameComponent gameComponent, Rigidbody2D body2D)
+        public ProjectileController(
+            ProjectileDefinition definition,
+            ReceiveHitData receiveHitData,
+            IGameComponent gameComponent, 
+            Rigidbody2D body2D)
         {
-            _parameters = parameters;
             _gameComponent = gameComponent;
-            body2D.velocity = gameComponent.Transform.up * parameters.speed;
+            _receiveHitData = receiveHitData;
+            body2D.velocity = gameComponent.Transform.up * definition.speed;
         }
         
-
-        public override void Update(float timeStep)
-        {
-            _elapsedTime += timeStep;
-            if (_elapsedTime > _parameters.lifeTime)
-            {
-                _gameComponent.DestroyGameObject();
-            }
-        }
 
         public void HandleCollisionEnter(Collision2D col)
         {
             _gameComponent.DestroyGameObject();
+            if (col.collider.TryGetComponent<IHitReceiver>(out var hitReceiver))
+            {
+                hitReceiver.ReceiveHit(_receiveHitData);
+            }
         }
     }
 }

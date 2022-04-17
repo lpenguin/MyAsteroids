@@ -18,6 +18,8 @@ namespace Game.Ufo
         
         
         [Header("VFX")]
+        // TODO: AssetReference
+        // TODO: rename to destroyVfx
         public GameObject vfxPrefab;
     }
 }

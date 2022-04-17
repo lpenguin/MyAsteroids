@@ -17,8 +17,8 @@ namespace Game.Player
             _parameters = parameters;
             var tr = gameComponent.Transform;
 
-            _primaryWeapon = _parameters.primaryWeaponDefinition.CreateWeapon(tr);
-            _secondaryWeapon = _parameters.secondaryWeaponDefinition.CreateWeapon(tr);
+            _primaryWeapon = _parameters.primaryWeaponDefinition.CreateWeapon(tr, playerData);
+            _secondaryWeapon = _parameters.secondaryWeaponDefinition.CreateWeapon(tr, playerData);
 
             PlayerControls.MainActions mainActions = InputManager.Instance.Controls.Main;
             
@@ -45,7 +45,7 @@ namespace Game.Player
             };
             
             // TODO: must not keep old playerData 
-            _parameters.playerState.playerData = new PlayerData();
+            _parameters.playerState.playerData = playerData;
         }
 
         public override void Update(float timeStep)

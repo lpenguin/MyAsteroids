@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.HitReceiver;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -36,9 +37,9 @@ namespace Game.Ufo
             Destroy(gameObject);
         }
 
-        public void ReceiveHit(float damage)
+        public void ReceiveHit(ReceiveHitData data)
         {
-            _controller?.ReceiveHit();
+            _controller?.ReceiveHit(data);
         }
     }
 }

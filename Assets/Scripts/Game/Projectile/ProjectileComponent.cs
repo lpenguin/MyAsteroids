@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.HitReceiver;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -9,14 +10,17 @@ namespace Game.Projectile
     {
         [SerializeField] 
         private ProjectileDefinition projectileParameters;
-        
+
+        [NonSerialized]
+        public ReceiveHitData receiveHitData; 
+            
         private ProjectileController _projectileController;
         private void Start()
         {
             Assert.IsTrue(TryGetComponent<Rigidbody2D>(out var body2D), 
                 $"Must have a {nameof(Rigidbody2D)}");
 
-            _projectileController = new ProjectileController(projectileParameters, this, body2D);
+            _projectileController = new ProjectileController(projectileParameters, receiveHitData,this, body2D);
         }
 
         private void OnEnable()

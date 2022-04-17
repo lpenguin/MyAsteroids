@@ -1,4 +1,5 @@
-﻿using Game.Input;
+﻿using Game.HitReceiver;
+using Game.Input;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -47,9 +48,10 @@ namespace Game.Player
             Destroy(gameObject);
         }
 
-        public void ReceiveHit(float damage)
+        // TODO:
+        public void ReceiveHit(ReceiveHitData receiveHitData)
         {
-            _playerController.TakeDamage(damage);
+            _playerController.TakeDamage(receiveHitData.Damage);
         }
     }
 }

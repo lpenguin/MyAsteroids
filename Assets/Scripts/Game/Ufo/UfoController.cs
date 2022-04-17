@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.HitReceiver;
+using UnityEngine;
 
 namespace Game.Ufo
 {
@@ -18,14 +19,16 @@ namespace Game.Ufo
 
         public void HandleCollision(Collider2D other)
         {
-            ReceiveHit();
             if (other.TryGetComponent<IHitReceiver>(out var receiver))
             {
-                receiver.ReceiveHit(_definition.damage);
+                receiver.ReceiveHit(new ReceiveHitData
+                {
+                    Damage = _definition.damage,
+                });
             }
         }
 
-        public void ReceiveHit()
+        public void ReceiveHit(ReceiveHitData receiveHitData)
         {
             if (_definition.vfxPrefab != null)
             {
@@ -35,7 +38,12 @@ namespace Game.Ufo
             }
             
             _component.DestroyGameObject();
-            _definition.playerState.playerData.Score += _definition.score;
+            
+            // TODO: ugly null check, use NullObject
+            if (receiveHitData.PlayerData != null)
+            {
+                receiveHitData.PlayerData.Score += _definition.score;    
+            }
         }
         
         public override void Update(float timeStep)
@@ -45,7 +53,6 @@ namespace Game.Ufo
             var dir = player.position - transform.position;
 
             _body2D.velocity = Vector2.Lerp(_body2D.velocity, (dir.normalized) * _definition.speed, _definition.speedSmoothness * timeStep);
-            
         }
     }
 }

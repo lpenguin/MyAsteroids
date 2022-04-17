@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.HitReceiver;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -31,9 +32,9 @@ namespace Game.Asteroid
             Destroy(gameObject);
         }
 
-        public void ReceiveHit(float damage)
+        public void ReceiveHit(ReceiveHitData data)
         {
-            _asteroidController.ReceiveHit();
+            _asteroidController.ReceiveHit(data);
         }
     }
 }

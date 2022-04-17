@@ -8,8 +8,6 @@ namespace Game.Asteroid
     public class AsteroidDefinition: ScriptableObject
     {
         [Header("General")]
-        // TODO: move this to singleton?
-        public PlayerState playerState;
         public int score;
         public float damage;
         
@@ -18,11 +16,13 @@ namespace Game.Asteroid
         public RangeFloat angularVelocityRange;
 
         [Header("Spawn")]
+        // TODO: AssetReference
         public GameObject spawnOnDamage;
         public int spawnCount;
         public RangeFloat spawnDistance;
 
         [Header("VFX")]
+        // TODO: AssetReference
         public GameObject vfxPrefab;
     }
 }

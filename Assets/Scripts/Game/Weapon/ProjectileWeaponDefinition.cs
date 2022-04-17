@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using Game.HitReceiver;
+using Game.Player;
+using Game.Projectile;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace Game.Weapon
@@ -7,23 +10,28 @@ namespace Game.Weapon
     public class ProjectileWeaponDefinition: WeaponDefinition
     {
         [SerializeField]
+        private float damage = 1f;
+        
+        [SerializeField]
         private float period = 0.2f;
         
         [SerializeField]
         private AssetReference projectilePrefab;
-        public override IWeapon CreateWeapon(Transform parent) => new Weapon(this, parent);
+        public override IWeapon CreateWeapon(Transform parent, PlayerData playerData) => new Weapon(this, parent, playerData);
         
         private class Weapon : IWeapon
         { 
             private readonly ProjectileWeaponDefinition _definition;
             private readonly Transform _parent;
+            private readonly PlayerData _playerData;
             private float _cooldown;
             private bool _isShooting = false;
             
-            public Weapon(ProjectileWeaponDefinition definition, Transform parent)
+            public Weapon(ProjectileWeaponDefinition definition, Transform parent, PlayerData playerData)
             {
                 _definition = definition;
                 _parent = parent;
+                _playerData = playerData;
             }
 
             
@@ -35,7 +43,20 @@ namespace Game.Weapon
 
             private void MakeAShot()
             {
-                _definition.projectilePrefab.InstantiateAsync(_parent.position, _parent.rotation);
+                var operationHandle = _definition.projectilePrefab.InstantiateAsync(_parent.position, _parent.rotation);
+                operationHandle.Completed += h =>
+                {
+                    if(h.Result.TryGetComponent<ProjectileComponent>(out var projectileComponent))
+                    {
+                        projectileComponent.receiveHitData = new ReceiveHitData
+                        {
+                            Damage = _definition.damage,
+                            PlayerData = _playerData,
+                            Owner = this,
+                        };
+                    }
+                };
+
                 _cooldown = _definition.period;
             }
 
