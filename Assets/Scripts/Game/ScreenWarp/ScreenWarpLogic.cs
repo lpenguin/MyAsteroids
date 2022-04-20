@@ -15,6 +15,8 @@ namespace Game.ScreenWarp
             _size = size;
         }
 
+        // TODO: spawns only at right
+        // TODO: glitching
         public void UpdateTunnel()
         {
             var topLeft = _camera.ViewportToWorldPoint(new Vector3(0, 0));

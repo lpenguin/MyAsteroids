@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e6ec3bb70d498ea763a8d9937b6843, type: 3}
   m_Name: UFO Definition
   m_EditorClassIdentifier: 
-  playerState: {fileID: 11400000, guid: c7a08418f42c9144dbb1d3311e1df71e, type: 2}
   score: 250
   damage: 0.2
   speed: 2
   speedSmoothness: 1.5
   rotationSpeed: 90
-  vfxPrefab: {fileID: 2013041818591889358, guid: 879407711b3622d47b73a2b9c5053f62, type: 3}
+  destroyVfx:
+    m_AssetGUID: 879407711b3622d47b73a2b9c5053f62
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

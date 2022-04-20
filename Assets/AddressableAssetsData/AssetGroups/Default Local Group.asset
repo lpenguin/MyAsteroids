@@ -18,11 +18,40 @@ MonoBehaviour:
   m_GUID: d81802a1b5d9d984b8720ae21d4577b1
   m_SerializeEntries:
   - m_GUID: 7ee76448cc38a18488eed2587d7a602b
-    m_Address: Assets/Prefabs/Projectile/Projectile.prefab
+    m_Address: Projectile
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 2327931043142301703, guid: 7ee76448cc38a18488eed2587d7a602b, type: 3}
-    m_TargetAsset: {fileID: 2327931043142301703, guid: 7ee76448cc38a18488eed2587d7a602b, type: 3}
+    m_SerializedLabels:
+    - Game Objects
+  - m_GUID: 879407711b3622d47b73a2b9c5053f62
+    m_Address: Blast
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - VFX
+  - m_GUID: e76dd190cead88444af5dc7e75b778d5
+    m_Address: Puff Big
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - VFX
+  - m_GUID: fc11c982be8f1884f9ce16cd070c3837
+    m_Address: Puff Small
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - VFX
+  - m_GUID: f068db3882c2110439d0dc7a23a2b166
+    m_Address: Asteroid Big
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Game Objects
+  - m_GUID: 98a9bea1caacfb544ab593eb92941fbf
+    m_Address: Asteroid Small
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Game Objects
+  - m_GUID: ed62a7056cf3cd1458aac9ae1ce731b2
+    m_Address: UFO
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Game Objects
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ca5ffd5fc4fca7e488c4e1c32021e4d4, type: 2}
   m_SchemaSet:

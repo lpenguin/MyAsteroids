@@ -1,5 +1,4 @@
-﻿using System;
-using Game.GameManager;
+﻿using Game.Entities.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -8,32 +7,32 @@ namespace Game.UI
 {
     public class ScoreComponent: MonoBehaviour
     {
-        [SerializeField]
-        private PlayerState playerState;
-
         private TMP_Text scoreText;
+        private PlayerData _playerData;
+
+        public void SetPlayer(PlayerData playerData)
+        {
+            _playerData = playerData;
+        }
+        
         private void Awake()
         {
-            Assert.IsNotNull(playerState, $"{nameof(playerState)} must be set");
-            
             scoreText = GetComponent<TMP_Text>();
-            Assert.IsNotNull(scoreText, $"{nameof(scoreText)} must be set");
+            Assert.IsNotNull(scoreText, $"{nameof(TMP_Text)} must be set");
         }
-
+        
         private void OnEnable()
         {
-            if (playerState != null)
-            {
-                playerState.playerData.Score.OnValueChanged += HandleScoreChanged;
-            }
+            if(_playerData == null) return;
+            
+            _playerData.Score.OnValueChanged += HandleScoreChanged;
         }
         
         private void OnDisable()
         {
-            if (playerState != null)
-            {
-                playerState.playerData.Score.OnValueChanged -= HandleScoreChanged;
-            }
+            if(_playerData == null) return;
+            
+            _playerData.Score.OnValueChanged += HandleScoreChanged;
         }
 
         private void HandleScoreChanged(int score)

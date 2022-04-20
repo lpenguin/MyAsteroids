@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d8a86c79b34133b08bfdb007eb83f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerParameters: {fileID: 11400000, guid: 2da752dbf604b55409a8cdb2bac0e645, type: 2}
+  definition: {fileID: 11400000, guid: 2da752dbf604b55409a8cdb2bac0e645, type: 2}
 --- !u!50 &2037989615
 Rigidbody2D:
   serializedVersion: 4

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e149028c3504932ba3193c7ebb3d42c, type: 3}
   m_Name: Asteroid Definiton
   m_EditorClassIdentifier: 
-  playerState: {fileID: 11400000, guid: c7a08418f42c9144dbb1d3311e1df71e, type: 2}
   score: 25
   damage: 0.05
   linearVelocityRange:
@@ -21,9 +20,17 @@ MonoBehaviour:
   angularVelocityRange:
     min: 100
     max: 250
-  spawnOnDamage: {fileID: 0}
+  spawnOnDamage:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   spawnCount: 0
   spawnDistance:
     min: 0
     max: 0
-  vfxPrefab: {fileID: 2888929171511713844, guid: fc11c982be8f1884f9ce16cd070c3837, type: 3}
+  vfxPrefab:
+    m_AssetGUID: fc11c982be8f1884f9ce16cd070c3837
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

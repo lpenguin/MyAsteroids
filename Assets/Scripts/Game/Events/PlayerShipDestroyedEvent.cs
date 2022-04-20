@@ -1,6 +1,4 @@
-﻿using Game.Player;
-
-namespace Game.Events
+﻿namespace Game.Events
 {
-    public record PlayerShipDestroyedEvent(PlayerData PlayerData, PlayerController PlayerController);
+    public record PlayerShipDestroyedEvent;
 }

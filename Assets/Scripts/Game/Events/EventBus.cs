@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game.Events
 {
@@ -18,7 +19,14 @@ namespace Game.Events
                 if (handler is not Action<TEvent> typedHandler)
                     continue;
 
-                typedHandler(@event);
+                try
+                {
+                    typedHandler(@event);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                }
             }
         }
 

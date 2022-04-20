@@ -1,22 +1,16 @@
 ﻿using System;
-using System.Globalization;
+using Game.Entities.Player;
 using Game.Events;
-using Game.GameManager;
-using Game.Player;
-using Game.Utils;
-using Game.Weapon;
-using Game.Weapon.Laser;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
+using UnityEngine.Assertions;
 using UnityEngine.UI;
 
 namespace Game.UI
 {
+    // TODO: player laser charge controller
+    // TODO: player health controller
     public class PlayerUIComponent: MonoBehaviour
     {
-        [SerializeField] 
-        private PlayerState playerState;
-        
         [SerializeField]
         private Image laserChargeImage;
         
@@ -27,66 +21,54 @@ namespace Game.UI
         private Image healthImage;
 
         [SerializeField]
-        private Text scoreText;
+        private ScoreComponent scoreComponent;
 
-        private LaserWeapon _laserWeapon;
-        private PlayerController _playerController;
-        
+        // private LaserWeapon _laserWeapon;
+        private PlayerData _playerData;
+
+        public void SetPlayer(PlayerData playerData)
+        {
+            _playerData = playerData;
+            scoreComponent.SetPlayer(playerData);
+            BindEvents();
+        }
+
+        private void Awake()
+        {
+            Assert.IsNotNull(laserChargeImage, $"{nameof(laserChargeImage)} must be set");
+            Assert.IsNotNull(laserChargeMaxImage, $"{nameof(laserChargeMaxImage)} must be set");
+            Assert.IsNotNull(healthImage, $"{nameof(healthImage)} must be set");
+            Assert.IsNotNull(scoreComponent, $"{nameof(scoreComponent)} must be set");
+        }
+
         private void OnEnable()
         {
-            HandleScoreChanged(playerState.playerData.Score.Value);
-            playerState.playerData.Score.OnValueChanged += HandleScoreChanged;
-            playerState.eventBus.Subscribe<PlayerShipAddedEvent>(HandlePlayerShipAdded);
-            playerState.eventBus.Subscribe<PlayerShipWeaponAddedEvent>(HandlePlayerShipWeaponAdded);
+            BindEvents();
         }
 
         private void OnDisable()
         {
-            playerState.playerData.Score.OnValueChanged -= HandleScoreChanged;
-            playerState.eventBus.Unsubscribe<PlayerShipAddedEvent>(HandlePlayerShipAdded);
-            playerState.eventBus.Unsubscribe<PlayerShipWeaponAddedEvent>(HandlePlayerShipWeaponAdded);
-            
-            if (_laserWeapon != null)
-            {
-                _laserWeapon.Charge.OnValueChanged -= HandleLaserChargeChanged;
-            }
-            
-            if (_playerController != null)
-            {
-                _playerController.Health.OnValueChanged -= HandlePlayerHealthChanged;
-            }
+            UnbindEvents();
         }
 
-        private void HandlePlayerShipAdded(PlayerShipAddedEvent playerShipAddedEvent)
+        private void BindEvents()
         {
-            _playerController = playerShipAddedEvent.PlayerController;
-            _playerController.Health.OnValueChanged += HandlePlayerHealthChanged;
-        }
+            if(_playerData == null) return;
 
-        private void HandlePlayerShipWeaponAdded(PlayerShipWeaponAddedEvent playerShipWeaponAddedEvent)
-        {
-            if (playerShipWeaponAddedEvent.Weapon is not LaserWeapon weapon)
-                return;
-
-            _laserWeapon = weapon;
-            _laserWeapon.Charge.OnValueChanged += HandleLaserChargeChanged;
+            _playerData.Health.OnValueChanged += HandlePlayerHealthChanged;
         }
         
-        private void HandleScoreChanged(int value)
+        private void UnbindEvents()
         {
-            scoreText.text = $"{value:D}";
+            if(_playerData == null) return;
+            
+            _playerData.Health.OnValueChanged -= HandlePlayerHealthChanged;
         }
+
 
         private void HandlePlayerHealthChanged(float value)
         {
             healthImage.fillAmount = value;
         }
-        
-        private void HandleLaserChargeChanged(float value)
-        {
-            laserChargeImage.fillAmount = value;
-            laserChargeMaxImage.enabled = Math.Abs(value - 1.0f) < 0.001;
-        }
-        
     }
 }
