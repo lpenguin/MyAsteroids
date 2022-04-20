@@ -56,10 +56,11 @@ namespace Game.Spawners
             var bottomRight = _camera.ViewportToWorldPoint(new Vector2(1, 1));
             Vector2 size = Vector2.zero;
             
-            var op = prefab.InstantiateAsync(transform);
+            var op = prefab.InstantiateAsync(topLeft * 1.2f, Quaternion.identity, transform);
             op.Completed += handle =>
             {
                 var gameObject = handle.Result;
+                
                 if (gameObject.TryGetComponent<SpriteRenderer>(out var spriteRenderer))
                 {
                     size = spriteRenderer.bounds.size;
