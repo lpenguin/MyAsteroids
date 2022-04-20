@@ -16,7 +16,6 @@ namespace Game.ScreenWarp
             _size = size;
         }
 
-        // TODO: glitching
         public void UpdateTunnel()
         {
             var topLeft = _camera.ViewportToWorldPoint(new Vector3(0, 0));

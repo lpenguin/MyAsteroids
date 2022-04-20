@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-    // TODO: player laser charge controller
-    // TODO: player health controller
     public class PlayerUIComponent: MonoBehaviour, IPlayerWeaponsUI
     {
         [SerializeField]

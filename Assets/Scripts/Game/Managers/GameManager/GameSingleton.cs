@@ -11,9 +11,6 @@ namespace Game.Managers.GameManager
 {
     public class GameSingleton : Singleton<GameSingleton>
     {
-        // TODO: needed only for UFOs
-        // TODO: use player data instead? Add transform there
-        // TODO: use player model instead? {Transform, PlayerData, WeaponSet}
         public Transform PlayerTransform { get; set; }
         public EventBus EventBus { get; set; }
         

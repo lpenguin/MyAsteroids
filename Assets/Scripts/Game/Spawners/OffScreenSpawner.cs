@@ -66,7 +66,6 @@ namespace Game.Spawners
                     size = spriteRenderer.bounds.size;
                 }
 
-                // TODO: review this 
                 Vector2 position;
                 if (Random.Range(0f, 1f) < 0.5f)
                 {
