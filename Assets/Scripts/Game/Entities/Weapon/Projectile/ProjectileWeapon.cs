@@ -1,5 +1,6 @@
 ﻿using Game.Entities.HitReceiver;
 using Game.Entities.Projectile;
+using Game.UI;
 using UnityEngine;
 
 namespace Game.Entities.Weapon.Projectile
@@ -59,6 +60,11 @@ namespace Game.Entities.Weapon.Projectile
             {
                 MakeAShot();
             }
+        }
+
+        public void SetupUI(IPlayerWeaponsUI gameUI)
+        {
+            // NOOP
         }
     }
 }

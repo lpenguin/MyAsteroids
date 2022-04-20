@@ -219,10 +219,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerComponent: {fileID: 2061545695}
   inputManager: {fileID: 2100211568}
-  gameUIComponent: {fileID: 3932467145847791860}
   pauseManager: {fileID: 1727004665}
   levelManager: {fileID: 989734580}
   musicManager: {fileID: 441151725}
+  gameUIComponent: {fileID: 3932467145847791860}
 --- !u!1 &441151722
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,6 +1063,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8306607371058073262, guid: 4d60efec3e0ef9449b8e0da7e68f3f23, type: 3}
+      propertyPath: playerComponent
+      value: 
+      objectReference: {fileID: 2061545695}
     - target: {fileID: 8571202729102076948, guid: 4d60efec3e0ef9449b8e0da7e68f3f23, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

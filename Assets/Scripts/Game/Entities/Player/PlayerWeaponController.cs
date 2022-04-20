@@ -1,4 +1,5 @@
-﻿using Game.Entities.Weapon;
+﻿using System.Collections.Generic;
+using Game.Entities.Weapon;
 
 namespace Game.Entities.Player
 {
@@ -18,6 +19,8 @@ namespace Game.Entities.Player
             };
         }
 
+        public IReadOnlyCollection<IWeapon> Weapons => _weapons;
+        
         public void Update(float timeDelta)
         {
             foreach (IWeapon weapon in _weapons)
@@ -25,6 +28,7 @@ namespace Game.Entities.Player
                 weapon.UpdateWeapon(timeDelta);
             }
         }
+        
         public void Shoot(int weaponSlot)
         {
             if(weaponSlot < 0 ||

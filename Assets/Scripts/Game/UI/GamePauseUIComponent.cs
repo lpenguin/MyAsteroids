@@ -22,7 +22,7 @@ namespace Game.UI
 
         public void SetPlayer(PlayerData playerData)
         {
-            scoreComponent.SetPlayer(playerData);
+            scoreComponent.ObserveScore(playerData.Score);
         }
         
         private void OnEnable()

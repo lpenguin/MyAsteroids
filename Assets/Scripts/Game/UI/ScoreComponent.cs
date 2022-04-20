@@ -1,4 +1,5 @@
 ﻿using Game.Entities.Player;
+using Game.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -8,11 +9,13 @@ namespace Game.UI
     public class ScoreComponent: MonoBehaviour
     {
         private TMP_Text scoreText;
-        private PlayerData _playerData;
+        private ObservableInt _score;
 
-        public void SetPlayer(PlayerData playerData)
+        public void ObserveScore(ObservableInt score)
         {
-            _playerData = playerData;
+            _score = score;
+            _score.OnValueChanged += HandleScoreChanged;
+            HandleScoreChanged(0);
         }
         
         private void Awake()
@@ -23,20 +26,22 @@ namespace Game.UI
         
         private void OnEnable()
         {
-            if(_playerData == null) return;
+            if(_score == null) return;
             
-            _playerData.Score.OnValueChanged += HandleScoreChanged;
+            _score.OnValueChanged += HandleScoreChanged;
         }
         
         private void OnDisable()
         {
-            if(_playerData == null) return;
+            if(_score == null) return;
             
-            _playerData.Score.OnValueChanged += HandleScoreChanged;
+            _score.OnValueChanged -= HandleScoreChanged;
         }
 
         private void HandleScoreChanged(int score)
         {
+            if (scoreText == null) return;
+            
             scoreText.text = $"{score:D}";
         }
     }

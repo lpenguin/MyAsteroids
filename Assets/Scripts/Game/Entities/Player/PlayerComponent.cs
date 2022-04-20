@@ -1,4 +1,6 @@
-﻿using Game.Entities.HitReceiver;
+﻿using System.Collections.Generic;
+using Game.Entities.HitReceiver;
+using Game.Entities.Weapon;
 using Game.Managers.GameManager;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -6,7 +8,7 @@ using UnityEngine.Assertions;
 namespace Game.Entities.Player
 {
     [AddComponentMenu("MyAsteroids/PlayerComponent")]
-    public class PlayerComponent: MonoBehaviour, IHitReceiver
+    public class PlayerComponent: MonoBehaviour, IPlayerFacade, IHitReceiver
     {
         [SerializeField] 
         private PlayerDefinition definition;
@@ -16,6 +18,7 @@ namespace Game.Entities.Player
         private PlayerInputController _playerInput;
         private PlayerPhysicsController _physicsController;
         private PlayerScoreController _playerScoreController;
+        private PlayerData _playerData;
 
         private void Awake()
         {
@@ -24,20 +27,19 @@ namespace Game.Entities.Player
 
             Assert.IsTrue(TryGetComponent<SpriteRenderer>(out var spriteRenderer),
                 $"Must have a {nameof(SpriteRenderer)}" );
-            PlayerView playerView = new PlayerView(transform, rigidbody2D, definition, spriteRenderer);
-            PlayerData playerData = new PlayerData();
             
-            _hitController = new PlayerHitController(playerView, playerData, definition);
+            PlayerView playerView = new PlayerView(transform, rigidbody2D, definition, spriteRenderer);
+            
+            _playerData = new PlayerData();
+            _hitController = new PlayerHitController(playerView, _playerData, definition);
             _weaponController = new PlayerWeaponController(playerView, definition);
             _physicsController = new PlayerPhysicsController(playerView, definition);
-            _playerScoreController = new PlayerScoreController(playerData);
+            _playerScoreController = new PlayerScoreController(_playerData);
             
             _playerInput = new PlayerInputController(
                 GameSingleton.Instance.InputManger.PlayerControls, 
                 _weaponController, 
                 _physicsController);
-            
-            GameSingleton.Instance.GameUI.SetPlayer(playerData);
         }
 
         private void OnEnable()
@@ -72,5 +74,8 @@ namespace Game.Entities.Player
         {
            _hitController.ReceiveHit(hitData);
         }
+
+        public IReadOnlyCollection<IWeapon> Weapons => _weaponController.Weapons;
+        public PlayerData PlayerData => _playerData;
     }
 }

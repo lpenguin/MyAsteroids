@@ -34,18 +34,19 @@ namespace Game.Managers.GameManager
         {
             Assert.IsNotNull(playerComponent, $"{nameof(playerComponent)} must be set");
             Assert.IsNotNull(inputManager, $"{nameof(inputManager)} must be set");
-            Assert.IsNotNull(gameUIComponent, $"{nameof(gameUIComponent)} must be set");
             Assert.IsNotNull(pauseManager, $"{nameof(pauseManager)} must be set");
             Assert.IsNotNull(levelManager, $"{nameof(levelManager)} must be set");
             Assert.IsNotNull(musicManager, $"{nameof(musicManager)} must be set");
+            Assert.IsNotNull(gameUIComponent, $"{nameof(gameUIComponent)} must be set");
             
             GameSingleton.Instance.EventBus = new EventBus();
             GameSingleton.Instance.PlayerTransform = playerComponent.transform;
             GameSingleton.Instance.InputManger = inputManager;
-            GameSingleton.Instance.GameUI = gameUIComponent;
             GameSingleton.Instance.PauseManager = pauseManager;
             GameSingleton.Instance.LevelManager = levelManager;
             GameSingleton.Instance.MusicManager = musicManager;
+            
+            gameUIComponent.PlayerFacade = playerComponent;
         }
     }
 }

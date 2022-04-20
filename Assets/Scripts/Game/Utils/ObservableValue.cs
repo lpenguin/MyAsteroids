@@ -27,12 +27,10 @@ namespace Game.Utils
 
         public ObservableValue():this(default)
         {
-             Debug.Log($"{GetType().Name} created (default)");
         }
         
         public ObservableValue(T initial)
         {
-            Debug.Log($"{GetType().Name} created ({initial})");
             _value = initial;
         }
     }

@@ -18,7 +18,6 @@ namespace Game.Managers.GameManager
         public EventBus EventBus { get; set; }
         
         public IInputManger InputManger { get; set; }
-        public IGameUI GameUI { get; set; }
         public IPauseManager PauseManager { get; set; }
         public ILevelManager LevelManager { get; set; }
         public IMusicManager MusicManager { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Entities.Player;
+using Game.Entities.Weapon.Laser;
 using Game.Events;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -9,7 +10,7 @@ namespace Game.UI
 {
     // TODO: player laser charge controller
     // TODO: player health controller
-    public class PlayerUIComponent: MonoBehaviour
+    public class PlayerUIComponent: MonoBehaviour, IPlayerWeaponsUI
     {
         [SerializeField]
         private Image laserChargeImage;
@@ -23,16 +24,22 @@ namespace Game.UI
         [SerializeField]
         private ScoreComponent scoreComponent;
 
-        // private LaserWeapon _laserWeapon;
+        private ILaserWeapon _laserWeapon;
         private PlayerData _playerData;
 
         public void SetPlayer(PlayerData playerData)
         {
             _playerData = playerData;
-            scoreComponent.SetPlayer(playerData);
+            scoreComponent.ObserveScore(playerData.Score);
             BindEvents();
         }
 
+        public void SetupLaserWeapon(ILaserWeapon laserWeapon)
+        {
+            _laserWeapon = laserWeapon;
+            _laserWeapon.Charge.OnValueChanged += HandleLaserChargeChanged;
+        }
+        
         private void Awake()
         {
             Assert.IsNotNull(laserChargeImage, $"{nameof(laserChargeImage)} must be set");
@@ -53,22 +60,39 @@ namespace Game.UI
 
         private void BindEvents()
         {
-            if(_playerData == null) return;
+            if (_playerData != null)
+            {
+                _playerData.Health.OnValueChanged += HandlePlayerHealthChanged;
+            }
 
-            _playerData.Health.OnValueChanged += HandlePlayerHealthChanged;
+            if (_laserWeapon != null)
+            {
+                _laserWeapon.Charge.OnValueChanged += HandleLaserChargeChanged;
+            }
         }
         
         private void UnbindEvents()
         {
-            if(_playerData == null) return;
+            if (_playerData != null)
+            {
+                _playerData.Health.OnValueChanged -= HandlePlayerHealthChanged;
+            }
             
-            _playerData.Health.OnValueChanged -= HandlePlayerHealthChanged;
+            if (_laserWeapon != null)
+            {
+                _laserWeapon.Charge.OnValueChanged -= HandleLaserChargeChanged;
+            }
         }
-
 
         private void HandlePlayerHealthChanged(float value)
         {
             healthImage.fillAmount = value;
+        }
+        
+        private void HandleLaserChargeChanged(float value)
+        {
+            laserChargeImage.fillAmount = value;
+            laserChargeMaxImage.enabled = value > .9f;
         }
     }
 }

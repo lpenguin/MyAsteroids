@@ -1,10 +1,11 @@
 ﻿using Game.Entities.HitReceiver;
+using Game.UI;
 using Game.Utils;
 using UnityEngine;
 
 namespace Game.Entities.Weapon.Laser
 {
-    public class LaserWeapon : IWeapon
+    public class LaserWeapon : IWeapon, ILaserWeapon
     {
         private readonly LaserWeaponDefinition _definition;
         private readonly Transform _parent;
@@ -65,6 +66,11 @@ namespace Game.Entities.Weapon.Laser
             }
 
             _lastRotation = _parent.rotation;
+        }
+
+        public void SetupUI(IPlayerWeaponsUI gameUI)
+        {
+            gameUI.SetupLaserWeapon(this);
         }
 
         private void ShootRays()
