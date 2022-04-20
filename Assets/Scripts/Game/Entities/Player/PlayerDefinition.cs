@@ -18,8 +18,5 @@ namespace Game.Entities.Player
         [Header("Weapons")]
         public Weapon.WeaponDefinition primaryWeaponDefinition;
         public Weapon.WeaponDefinition secondaryWeaponDefinition;
-
-        [Header("VFX")]
-        public AssetReference destroyVfx;
     }
 }

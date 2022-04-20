@@ -25,17 +25,7 @@ namespace Game.Entities.Player
 
         public void ShowPlayerDeath()
         {
-            if(PlayerDefinition.destroyVfx == null) return;
-            
-            var op = PlayerDefinition.destroyVfx.InstantiateAsync(
-                Transform.position,
-                Transform.rotation
-            );
-
-            op.Completed += gameObject =>
-            {
-                SpriteRenderer.enabled = false;
-            };
+            SpriteRenderer.enabled = false;
         }
     }
 }
