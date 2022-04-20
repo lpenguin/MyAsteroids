@@ -22,36 +22,43 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Game Objects
+    - Preload
   - m_GUID: 879407711b3622d47b73a2b9c5053f62
     m_Address: Blast
     m_ReadOnly: 0
     m_SerializedLabels:
     - VFX
+    - Preload
   - m_GUID: e76dd190cead88444af5dc7e75b778d5
     m_Address: Puff Big
     m_ReadOnly: 0
     m_SerializedLabels:
     - VFX
+    - Preload
   - m_GUID: fc11c982be8f1884f9ce16cd070c3837
     m_Address: Puff Small
     m_ReadOnly: 0
     m_SerializedLabels:
     - VFX
+    - Preload
   - m_GUID: f068db3882c2110439d0dc7a23a2b166
     m_Address: Asteroid Big
     m_ReadOnly: 0
     m_SerializedLabels:
     - Game Objects
+    - Preload
   - m_GUID: 98a9bea1caacfb544ab593eb92941fbf
     m_Address: Asteroid Small
     m_ReadOnly: 0
     m_SerializedLabels:
     - Game Objects
+    - Preload
   - m_GUID: ed62a7056cf3cd1458aac9ae1ce731b2
     m_Address: UFO
     m_ReadOnly: 0
     m_SerializedLabels:
     - Game Objects
+    - Preload
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ca5ffd5fc4fca7e488c4e1c32021e4d4, type: 2}
   m_SchemaSet:
