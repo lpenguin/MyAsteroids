@@ -27,16 +27,16 @@ namespace Game.Entities.Weapon.Projectile
     
         private void MakeAShot()
         {
-            // TODO: Asset
+            // TODO: Pooling
             var operationHandle = _definition.projectilePrefab.InstantiateAsync(_owner.position, _owner.rotation);
             operationHandle.Completed += h =>
             {
                 if(h.Result.TryGetComponent<ProjectileComponent>(out var projectileComponent))
                 {
-                    projectileComponent.hitData = new HitData
+                    projectileComponent.SetHitData(new HitData
                     {
                         Damage = _definition.damage,
-                    };
+                    });
                 }
             };
     

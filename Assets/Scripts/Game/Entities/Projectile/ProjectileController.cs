@@ -7,13 +7,13 @@ namespace Game.Entities.Projectile
     {
 
         private readonly ProjectileView _view;
-        private readonly HitData _hitData;
+        private readonly ProjectileModel _model;
         
         public ProjectileController(ProjectileView view, ProjectileDefinition definition,
-            HitData hitData)
+            ProjectileModel model)
         {
             _view = view;
-            _hitData = hitData;
+            _model = model;
             
             _view.Rigidbody2D.velocity = view.Transform.up * definition.speed;
         }
@@ -24,7 +24,7 @@ namespace Game.Entities.Projectile
             _view.Destroy();
             if (col.collider.TryGetComponent<IHitReceiver>(out var hitReceiver))
             {
-                hitReceiver.ReceiveHit(_hitData);
+                hitReceiver.ReceiveHit(_model.HitData);
             }
         }
     }
