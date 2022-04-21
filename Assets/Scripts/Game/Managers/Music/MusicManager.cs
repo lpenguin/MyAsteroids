@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Game.Managers.GameManager;
+using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Game.Managers.Music
 {
@@ -10,6 +12,12 @@ namespace Game.Managers.Music
         private void Awake()
         {
             audioSource = GetComponent<AudioSource>();
+            Assert.IsNotNull(audioSource, $"{nameof(audioSource)} must be set");
+        }
+
+        private void Start()
+        {
+            audioSource.volume = GameSingleton.Instance.PreferencesManager.MusicVolume;
         }
 
         public float Volume

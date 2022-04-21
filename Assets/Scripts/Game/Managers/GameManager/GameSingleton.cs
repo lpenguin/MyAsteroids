@@ -3,6 +3,7 @@ using Game.Managers.Input;
 using Game.Managers.Level;
 using Game.Managers.Music;
 using Game.Managers.Pause;
+using Game.Managers.Preferences;
 using Game.UI;
 using Game.Utils;
 using UnityEngine;
@@ -18,5 +19,6 @@ namespace Game.Managers.GameManager
         public IPauseManager PauseManager { get; set; }
         public ILevelManager LevelManager { get; set; }
         public IMusicManager MusicManager { get; set; }
+        public IPreferencesManager PreferencesManager { get; set; }
     }
 }

@@ -44,6 +44,7 @@ namespace Game.UI
         public void OnVolumeChanged(Single volume)
         {
             GameSingleton.Instance.MusicManager.Volume = volume;
+            GameSingleton.Instance.PreferencesManager.MusicVolume = volume;
         }
         
         public void OnContinuePressed()
