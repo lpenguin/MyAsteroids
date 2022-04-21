@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game.Managers.Preferences
 {
@@ -6,16 +7,17 @@ namespace Game.Managers.Preferences
     {
         private const string MusicVolumePref = "audio.music.volume";
         
-        public float MusicVolume { get; set; }
-
-        private void OnEnable()
+        public float MusicVolume
         {
-            MusicVolume = PlayerPrefs.GetFloat(MusicVolumePref);
+            get => _musicVolume ??= PlayerPrefs.GetFloat(MusicVolumePref, 1.0f);
+            set => _musicVolume = value; 
         }
+
+        private float? _musicVolume;
 
         private void OnDisable()
         {
-            PlayerPrefs.SetFloat(MusicVolumePref, MusicVolume);
+            PlayerPrefs.SetFloat(MusicVolumePref, _musicVolume ?? 1.0f);
             PlayerPrefs.Save();
         }
     }

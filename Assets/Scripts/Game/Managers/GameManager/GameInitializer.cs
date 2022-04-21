@@ -4,6 +4,7 @@ using Game.Managers.Input;
 using Game.Managers.Level;
 using Game.Managers.Music;
 using Game.Managers.Pause;
+using Game.Managers.Preferences;
 using Game.UI;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -26,6 +27,9 @@ namespace Game.Managers.GameManager
 
         [SerializeField]
         private LevelManager levelManager;
+
+        [SerializeField]
+        private PreferencesManager preferencesManager;
         
         [SerializeField]
         private MusicManager musicManager;
@@ -38,6 +42,7 @@ namespace Game.Managers.GameManager
             Assert.IsNotNull(levelManager, $"{nameof(levelManager)} must be set");
             Assert.IsNotNull(musicManager, $"{nameof(musicManager)} must be set");
             Assert.IsNotNull(gameUIComponent, $"{nameof(gameUIComponent)} must be set");
+            Assert.IsNotNull(preferencesManager, $"{nameof(preferencesManager)} must be set");
             
             GameSingleton.Instance.EventBus = new EventBus();
             GameSingleton.Instance.PlayerTransform = playerComponent.transform;
@@ -45,6 +50,7 @@ namespace Game.Managers.GameManager
             GameSingleton.Instance.PauseManager = pauseManager;
             GameSingleton.Instance.LevelManager = levelManager;
             GameSingleton.Instance.MusicManager = musicManager;
+            GameSingleton.Instance.PreferencesManager = preferencesManager;
             
             gameUIComponent.PlayerFacade = playerComponent;
         }
