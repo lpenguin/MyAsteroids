@@ -22,13 +22,13 @@ namespace Game.Entities.Player
 
         private void Awake()
         {
-            Assert.IsTrue(TryGetComponent<Rigidbody2D>(out var rigidbody2D), 
-                $"Must have a {nameof(Rigidbody2D)}");
+            var body = GetComponent<Rigidbody2D>();
+            Assert.IsNotNull(body, $"Must have a {nameof(Rigidbody2D)}");
 
-            Assert.IsTrue(TryGetComponent<SpriteRenderer>(out var spriteRenderer),
-                $"Must have a {nameof(SpriteRenderer)}" );
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+            Assert.IsNotNull(spriteRenderer,  $"Must have a {nameof(SpriteRenderer)}" );
             
-            PlayerView playerView = new PlayerView(transform, rigidbody2D, definition, spriteRenderer);
+            PlayerView playerView = new PlayerView(transform, body, definition, spriteRenderer);
             
             _playerData = new PlayerData();
             _hitController = new PlayerHitController(playerView, _playerData, definition);

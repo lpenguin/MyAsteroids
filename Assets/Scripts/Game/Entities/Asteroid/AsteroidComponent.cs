@@ -15,8 +15,8 @@ namespace Game.Entities.Asteroid
         private void Awake()
         {
             Assert.IsNotNull(parameters, $"{nameof(parameters)} must be set");
-            Assert.IsTrue(TryGetComponent<Rigidbody2D>(out var body), 
-                $"Must have a ${nameof(Rigidbody2D)}");
+            var body = GetComponent<Rigidbody2D>();
+            Assert.IsNotNull(body, $"Must have a ${nameof(Rigidbody2D)}");
 
             AsteroidView asteroidView = new AsteroidView(transform, parameters);
             _asteroidController = new AsteroidController(asteroidView, parameters, body);
