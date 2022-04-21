@@ -4,6 +4,7 @@ using Game.Managers.GameManager;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Game.UI
 {
@@ -15,9 +16,14 @@ namespace Game.UI
         [SerializeField]
         private ScoreComponent scoreComponent;
 
+        [SerializeField]
+        private Slider musicVolumeSlider;
+        
         private void Awake()
         {
             Assert.IsNotNull(scoreComponent, $"{nameof(scoreComponent)} must be set");
+            Assert.IsNotNull(musicVolumeSlider, $"{nameof(musicVolumeSlider)} must be set");
+            Assert.IsNotNull(gamePauseUi, $"{nameof(gamePauseUi)} must be set");
         }
 
         public void SetPlayer(PlayerData playerData)
@@ -27,11 +33,14 @@ namespace Game.UI
         
         private void OnEnable()
         {
+            musicVolumeSlider.value = GameSingleton.Instance.PreferencesManager.MusicVolume;
+            musicVolumeSlider.onValueChanged.AddListener(OnVolumeChanged);
             GameSingleton.Instance.InputManger.PlayerControls.Main.Pause.performed += HandlePausePerformed;
         }
 
         private void OnDisable()
         {
+            musicVolumeSlider.onValueChanged.RemoveListener(OnVolumeChanged);
             GameSingleton.Instance.InputManger.PlayerControls.Main.Pause.performed -= HandlePausePerformed;
         }
         

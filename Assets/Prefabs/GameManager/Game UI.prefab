@@ -2607,19 +2607,7 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7468627026827699994}
-        m_TargetAssemblyTypeName: Game.UI.GamePauseUIComponent, Game
-        m_MethodName: OnVolumeChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &5869545129925411642
 GameObject:
   m_ObjectHideFlags: 0
@@ -3575,6 +3563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamePauseUi: {fileID: 1970558896504653672}
   scoreComponent: {fileID: 3461772197079549839}
+  musicVolumeSlider: {fileID: 8407037448163370209}
 --- !u!114 &3461772197079549839
 MonoBehaviour:
   m_ObjectHideFlags: 0
