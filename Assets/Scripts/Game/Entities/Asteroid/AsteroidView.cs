@@ -17,7 +17,7 @@ namespace Game.Entities.Asteroid
         {
             if (_definition.vfxPrefab != null)
             {
-                _definition.vfxPrefab.InstantiateAsync(
+                Object.Instantiate(_definition.vfxPrefab,
                     Transform.position,
                     Transform.rotation
                 );

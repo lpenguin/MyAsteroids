@@ -154,10 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interval: 4
   prefabs:
-  - m_AssetGUID: ed62a7056cf3cd1458aac9ae1ce731b2
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  - {fileID: 3119970282928386059, guid: ed62a7056cf3cd1458aac9ae1ce731b2, type: 3}
 --- !u!4 &5827217
 Transform:
   m_ObjectHideFlags: 0
@@ -448,50 +445,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &935691075
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 935691076}
-  - component: {fileID: 935691077}
-  m_Layer: 0
-  m_Name: Asset Preload Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &935691076
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935691075}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 971776225}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &935691077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935691075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f94b5f976fc4a6a9234469928ff09a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &971776224
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +478,6 @@ Transform:
   - {fileID: 1727004666}
   - {fileID: 441151724}
   - {fileID: 989734579}
-  - {fileID: 935691076}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -696,10 +648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interval: 2
   prefabs:
-  - m_AssetGUID: f068db3882c2110439d0dc7a23a2b166
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  - {fileID: 7607803663713920278, guid: f068db3882c2110439d0dc7a23a2b166, type: 3}
 --- !u!1001 &2061545694
 PrefabInstance:
   m_ObjectHideFlags: 0

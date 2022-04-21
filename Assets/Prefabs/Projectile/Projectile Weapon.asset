@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77c489ab5fb41dd82d6abbb6a293ca2, type: 3}
   m_Name: Projectile Weapon
   m_EditorClassIdentifier: 
+  damage: 1
   period: 0.2
-  shootSound: {fileID: 8300000, guid: 4ed4b47a8d4996a4f8e1d83c566447f9, type: 3}
-  projectilePrefab:
-    m_AssetGUID: 7ee76448cc38a18488eed2587d7a602b
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  projectilePrefab: {fileID: 2327931043142301703, guid: 7ee76448cc38a18488eed2587d7a602b, type: 3}

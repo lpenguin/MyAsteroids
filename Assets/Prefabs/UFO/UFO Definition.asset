@@ -17,8 +17,4 @@ MonoBehaviour:
   speed: 2
   speedSmoothness: 1.5
   rotationSpeed: 90
-  destroyVfx:
-    m_AssetGUID: 879407711b3622d47b73a2b9c5053f62
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  destroyVfx: {fileID: 2013041818591889358, guid: 879407711b3622d47b73a2b9c5053f62, type: 3}

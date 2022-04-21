@@ -54,7 +54,7 @@ namespace Game.Entities.Asteroid
                 var offset = _definition.spawnDistance.RandomVector2();
 
                 // TODO: pooling
-                _definition.spawnOnDamage.InstantiateAsync(
+                Object.Instantiate(_definition.spawnOnDamage,
                     initialPosition + offset,
                     Quaternion.identity, _asteroidView.Transform.parent
                 );

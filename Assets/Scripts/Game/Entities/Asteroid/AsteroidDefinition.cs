@@ -1,6 +1,5 @@
 ﻿using Game.Utils;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Game.Entities.Asteroid
 {
@@ -17,12 +16,12 @@ namespace Game.Entities.Asteroid
 
         [Header("Spawn")]
         // TODO: pooling
-        public AssetReference spawnOnDamage;
+        public GameObject spawnOnDamage;
         public int spawnCount;
         public RangeFloat spawnDistance;
 
         [Header("VFX")]
         // TODO: pooling
-        public AssetReference vfxPrefab;
+        public GameObject vfxPrefab;
     }
 }

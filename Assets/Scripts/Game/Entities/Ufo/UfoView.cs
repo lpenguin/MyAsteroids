@@ -22,7 +22,7 @@ namespace Game.Entities.Ufo
         {
             if (_definition.destroyVfx != null)
             {
-                _definition.destroyVfx.InstantiateAsync(
+                Object.Instantiate(_definition.destroyVfx,
                     Transform.position,
                     Transform.rotation);
             }

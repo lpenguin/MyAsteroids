@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Game.Entities.Ufo
 {
@@ -17,6 +16,6 @@ namespace Game.Entities.Ufo
 
 
         [Header("VFX")]
-        public AssetReference destroyVfx;
+        public GameObject destroyVfx;
     }
 }

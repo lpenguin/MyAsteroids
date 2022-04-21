@@ -20,17 +20,9 @@ MonoBehaviour:
   angularVelocityRange:
     min: 100
     max: 250
-  spawnOnDamage:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  spawnOnDamage: {fileID: 0}
   spawnCount: 0
   spawnDistance:
     min: 0
     max: 0
-  vfxPrefab:
-    m_AssetGUID: fc11c982be8f1884f9ce16cd070c3837
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  vfxPrefab: {fileID: 2888929171511713844, guid: fc11c982be8f1884f9ce16cd070c3837, type: 3}

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Game.Entities.Weapon.Projectile
 {
@@ -13,7 +12,8 @@ namespace Game.Entities.Weapon.Projectile
         public float period = 0.2f;
         
         [SerializeField]
-        public AssetReference projectilePrefab;
+        public GameObject projectilePrefab;
+        
         public override IWeapon CreateWeapon(Transform owner) => new ProjectileWeapon(this, owner);
     }
 }

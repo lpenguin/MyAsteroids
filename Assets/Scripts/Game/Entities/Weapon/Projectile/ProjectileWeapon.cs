@@ -28,17 +28,14 @@ namespace Game.Entities.Weapon.Projectile
         private void MakeAShot()
         {
             // TODO: Pooling
-            var operationHandle = _definition.projectilePrefab.InstantiateAsync(_owner.position, _owner.rotation);
-            operationHandle.Completed += h =>
+            var go = Object.Instantiate(_definition.projectilePrefab, _owner.position, _owner.rotation);
+            if(go.TryGetComponent<ProjectileComponent>(out var projectileComponent))
             {
-                if(h.Result.TryGetComponent<ProjectileComponent>(out var projectileComponent))
+                projectileComponent.SetHitData(new HitData
                 {
-                    projectileComponent.SetHitData(new HitData
-                    {
-                        Damage = _definition.damage,
-                    });
-                }
-            };
+                    Damage = _definition.damage,
+                });
+            }
     
             _cooldown = _definition.period;
         }
