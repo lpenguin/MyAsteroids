@@ -219,6 +219,7 @@ MonoBehaviour:
   gameUIComponent: {fileID: 3932467145847791860}
   pauseManager: {fileID: 1727004665}
   levelManager: {fileID: 989734580}
+  preferencesManager: {fileID: 837965074}
   musicManager: {fileID: 441151725}
 --- !u!1 &441151722
 GameObject:
