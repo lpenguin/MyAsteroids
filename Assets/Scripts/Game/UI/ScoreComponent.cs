@@ -8,7 +8,9 @@ namespace Game.UI
 {
     public class ScoreComponent: MonoBehaviour
     {
+        [SerializeField]
         private TMP_Text scoreText;
+        
         private ObservableInt _score;
 
         public void ObserveScore(ObservableInt score)
@@ -20,7 +22,6 @@ namespace Game.UI
         
         private void Awake()
         {
-            scoreText = GetComponent<TMP_Text>();
             Assert.IsNotNull(scoreText, $"{nameof(TMP_Text)} must be set");
         }
         
@@ -29,6 +30,7 @@ namespace Game.UI
             if(_score == null) return;
             
             _score.OnValueChanged += HandleScoreChanged;
+            HandleScoreChanged(_score.Value);
         }
         
         private void OnDisable()
